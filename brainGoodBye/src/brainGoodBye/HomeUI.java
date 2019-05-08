@@ -5,22 +5,29 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
-public class MainUI extends JFrame{
+public class HomeUI extends JFrame{
 
-	JMenuBar menuBar;
+	/**
+	 * generated UID
+	 */
+	private static final long serialVersionUID = -2836282326556330720L;
 	
-	public MainUI() {
+	TheMenuBar menuBar;
+	
+	public HomeUI() {
 		super("Team BrainGoodbye DIY");
-		AboutFrame ap = new AboutFrame();
-		menuBar = new JMenuBar();
+		menuBar = new TheMenuBar();
 	}
 	
 	public void start() {
 		//Basic setup
+		this.setSize(400, 400);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
 		
+        menuBar.initialize();
+        
         //Add Stuff
 		this.setJMenuBar(menuBar);
 		
