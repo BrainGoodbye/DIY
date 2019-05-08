@@ -21,7 +21,7 @@ public class TheMenuBar extends JMenuBar {
 	
 	public TheMenuBar() {
 		super();
-		help = new JMenu();
+		help = new JMenu("Help");
 	}
 	
 	public void initialize() {
