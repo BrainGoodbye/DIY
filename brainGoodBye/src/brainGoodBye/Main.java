@@ -6,6 +6,7 @@ public class Main {
 		
 		//Do basically nothing
 		HomeUI app = new HomeUI();
+		Version.getVersion();
 		app.start();
 	}
 
