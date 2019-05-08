@@ -23,15 +23,6 @@ public final class Version {
 		
 	}
 	
-	/**
-	 * Runs the program.
-	 * 
-	 * @param args Command-line arguments. Not used for this program.
-	 */
-	public static void main(String[] args) {
-			setVersion();
-			System.out.println(getVersion());
-	}
 	
 	/**
 	 * Sets the program version.
