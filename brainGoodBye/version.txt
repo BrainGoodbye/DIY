@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 -Version 0.0.0.1
-=======
--Version 0.0.0.1
->>>>>>> branch 'master' of https://github.com/huntjos1/DIY.git
 -Authors: Joey Hunt every one else did nothing
