@@ -4,20 +4,38 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * @author Hunter Lantz
+ * 
+ * This class represents the most recent version of our program.
+ */
 public class Version {
 
+	/**
+	 * Contains the current version of the program.
+	 */
 	private static String VERSION="";
 	
+	/**
+	 * Prevents instantiation.
+	 */
 	private Version() {
 		
 	}
 	
+	/**
+	 * Runs the program.
+	 * 
+	 * @param args Command-line arguments. Not used for this program.
+	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 			setVersion();
 			System.out.println(getVersion());
 	}
 	
+	/**
+	 * Sets the program version.
+	 */
 	public static void setVersion() {
 		File file = new File("version.txt");
 		try {
@@ -25,12 +43,17 @@ public class Version {
 			while(scanner.hasNextLine()) {
 				VERSION+=scanner.nextLine();
 			}
+			scanner.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Returns the program's current version.
+	 * 
+	 * @return The project version.
+	 */
 	public static String getVersion() {
 		return VERSION;
 	}
