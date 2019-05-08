@@ -3,22 +3,35 @@ package brainGoodBye;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 
-public class HomeUI extends JFrame{
+/**
+ * @author Jacob Ficker
+ * 
+ * This class represents the initial UI of the program.
+ */
+public class HomeUI extends JFrame {
 
 	/**
-	 * generated UID
+	 * Automatically-generated serial ID.
 	 */
 	private static final long serialVersionUID = -2836282326556330720L;
 	
-	TheMenuBar menuBar;
+	/**
+	 * A menu bar for the program.
+	 */
+	final TheMenuBar menuBar;
 	
+	/**
+	 * Initializes the home UI of the program.
+	 */
 	public HomeUI() {
 		super("Team BrainGoodbye DIY");
 		menuBar = new TheMenuBar();
 	}
 	
+	/**
+	 * Starts the GUI.
+	 */
 	public void start() {
 		//Basic setup
 		this.setSize(400, 400);
