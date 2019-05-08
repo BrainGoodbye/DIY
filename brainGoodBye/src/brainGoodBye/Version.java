@@ -9,7 +9,7 @@ import java.util.Scanner;
  * 
  * This class represents the most recent version of our program.
  */
-public class Version {
+public final class Version {
 
 	/**
 	 * Contains the current version of the program.
