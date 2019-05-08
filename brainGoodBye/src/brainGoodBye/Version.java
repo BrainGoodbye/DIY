@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Version {
+public final class Version {
 
 	private static String VERSION="";
 	
@@ -12,11 +12,6 @@ public class Version {
 		
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-			setVersion();
-			System.out.println(getVersion());
-	}
 	
 	public static void setVersion() {
 		File file = new File("version.txt");
@@ -25,6 +20,7 @@ public class Version {
 			while(scanner.hasNextLine()) {
 				VERSION+=scanner.nextLine();
 			}
+			scanner.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
