@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 /**
  * @author Hunter Lantz
+ * @author Thaddaeus Hug
  * 
  * This class represents the most recent version of our program.
  */
@@ -46,7 +47,6 @@ public final class Version {
 	 * @return The project version.
 	 */
 	public static String getVersion() {
-		setVersion();
 		return VERSION;
 	}
 

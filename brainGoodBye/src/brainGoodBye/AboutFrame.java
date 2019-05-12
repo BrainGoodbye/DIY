@@ -40,6 +40,7 @@ public class AboutFrame extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Version.setVersion();
 		textLabel.setText(Version.getVersion());
 		textLabel.setHorizontalAlignment(JLabel.CENTER);
 		textLabel.setVerticalAlignment(JLabel.CENTER);
