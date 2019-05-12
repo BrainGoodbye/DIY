@@ -1,8 +1,15 @@
 package brainGoodBye;
 
+import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 
 /**
  * @author Thad Hug
@@ -21,12 +28,23 @@ public class AboutFrame extends JFrame {
 	 * Instantiates the frame.
 	 */
 	public AboutFrame() {
+		this.setTitle("About");
 		this.setSize(400, 400);
-		JLabel lab = new JLabel();
-		lab.setText(Version.getVersion());
-		this.add(lab);
+		JLabel textLabel = new JLabel();
+		BufferedImage buffImage;
+		try {
+			buffImage = ImageIO.read(new File("./brain_hand.jpg"));
+			Image image = new ImageIcon(buffImage).getImage().getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
+			JLabel imageLabel = new JLabel(new ImageIcon(image));
+			this.add(imageLabel, BorderLayout.NORTH);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		textLabel.setText(Version.getVersion());
+		textLabel.setHorizontalAlignment(JLabel.CENTER);
+		textLabel.setVerticalAlignment(JLabel.CENTER);
+		this.add(textLabel, BorderLayout.CENTER);
 		
-		this.pack();
 		this.setVisible(true);
 	}
 

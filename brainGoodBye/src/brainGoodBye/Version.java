@@ -32,7 +32,7 @@ public final class Version {
 		try {
 			Scanner scanner = new Scanner(file);
 			while(scanner.hasNextLine()) {
-				VERSION+=scanner.nextLine();
+				VERSION = VERSION + scanner.nextLine() + "\n";
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
@@ -46,6 +46,7 @@ public final class Version {
 	 * @return The project version.
 	 */
 	public static String getVersion() {
+		setVersion();
 		return VERSION;
 	}
 
