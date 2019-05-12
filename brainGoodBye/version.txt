@@ -1,2 +1,8 @@
--Version 0.0.0.1
--Authors: Joey Hunt every one else did nothing
+<html>
+<p style="text-align:center;">BrainGoodbye DIY Organizer<br>
+<br>
+Version 0.0.0.1<br>
+<br>
+Authors: Jacob Ficker, Joey Hunt, Hunter Lantz, Thaddaeus Hug</p>
+
+</html>
