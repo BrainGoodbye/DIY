@@ -1,6 +1,7 @@
 package brainGoodBye;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -45,7 +46,7 @@ public class AboutFrame extends JFrame {
 		textLabel.setHorizontalAlignment(JLabel.CENTER);
 		textLabel.setVerticalAlignment(JLabel.CENTER);
 		this.add(textLabel, BorderLayout.CENTER);
-		
+		this.getContentPane().setBackground(Color.WHITE);
 		this.setVisible(true);
 	}
 
