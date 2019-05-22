@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 /**
  * @author Hunter Lantz
+ * @author Thaddaeus Hug
  * 
  * This class represents the most recent version of our program.
  */
@@ -32,7 +33,7 @@ public final class Version {
 		try {
 			Scanner scanner = new Scanner(file);
 			while(scanner.hasNextLine()) {
-				VERSION+=scanner.nextLine();
+				VERSION = VERSION + scanner.nextLine() + "\n";
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
