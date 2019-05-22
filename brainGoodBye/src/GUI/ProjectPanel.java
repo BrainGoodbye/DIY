@@ -51,4 +51,12 @@ public class ProjectPanel extends JPanel {
 		add(searchPanel);
 		add(thumbnailPanel);
 	}
+	
+	public static int getSortBy() {
+		return 1;
+	}
+	
+	public static void setSortBy(int attributeNumber) {
+		
+	}
 }
