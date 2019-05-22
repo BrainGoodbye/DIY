@@ -1,5 +1,7 @@
 package brainGoodBye;
 
+import GUI.HomeUI;
+
 /**
  * @author Jacob Ficker
  * @author Thad Hug

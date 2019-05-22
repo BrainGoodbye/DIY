@@ -1,4 +1,4 @@
-package brainGoodBye;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import brainGoodBye.Version;
 
 /**
  * @author Thad Hug
