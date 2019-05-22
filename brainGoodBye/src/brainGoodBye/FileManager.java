@@ -3,7 +3,9 @@ package brainGoodBye;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,8 +19,9 @@ public final class FileManager {
 	
 	/**
 	 * @author Thaddaeus
+	 * @throws IOException 
 	 */
-	public void exportSettings() {
+	public void exportSettings() throws IOException {
 		int sortByAttribute = GUI.ProjectPanel.getSortBy();
 		File file = new File("settings.txt");
 	    FileWriter fileWriter = new FileWriter("settings.txt");
@@ -37,11 +40,25 @@ public final class FileManager {
 		int sortByAttribute = -1;
 		try {
 			Scanner scanner = new Scanner(file);
-			GUI.ProjectPanel.setSortBy(scanner.next());
+			GUI.ProjectPanel.setSortBy(scanner.nextInt());
 			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
+	
+//	/**
+//	 * @author Thaddaeus
+//	 */
+//	exportAll(List<Project> projects) {
+//		
+//	}
+//	
+//	/**
+//	 * @author Thaddaeus
+//	 */
+//	List<Project> importAll() {
+//		
+//	}
 
 }
