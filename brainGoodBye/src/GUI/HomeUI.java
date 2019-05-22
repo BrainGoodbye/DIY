@@ -1,4 +1,4 @@
-package brainGoodBye;
+package GUI;
 
 import java.awt.BorderLayout;
 
