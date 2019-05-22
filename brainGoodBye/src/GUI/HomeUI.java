@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JFrame;
 
@@ -44,6 +45,9 @@ public class HomeUI extends JFrame {
         //Add Stuff
 		this.setJMenuBar(menuBar);
 		
+		this.add(new OptionsPanel(), BorderLayout.EAST);
+		
+		this.getContentPane().setBackground(Color.WHITE);
 		//You Can SEE ME NOW
 		this.setVisible(true);
 	}
