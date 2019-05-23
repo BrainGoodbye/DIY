@@ -1,12 +1,13 @@
 package GUI;
 
+import java.awt.event.ItemEvent;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
- * @author Joey Hunt
- *
  * 
+ *
+ * @author Joey Hunt
  */
 public class SearchPanel extends JPanel {
 
@@ -16,7 +17,7 @@ public class SearchPanel extends JPanel {
 	private static final long serialVersionUID = 9015600827675719527L;
 	
 	/**
-	 * 
+	 * An array of strings representing the ordering methods available.
 	 */
 	private static final String[] sortOptions = {"Cost"};
 	
@@ -27,7 +28,9 @@ public class SearchPanel extends JPanel {
 	
 	
 	/**
+	 * Creates a search panel.
 	 * 
+	 * @author Joey Hunt
 	 */
 	SearchPanel() {
 		sortByBox = new JComboBox<>(sortOptions);
@@ -36,27 +39,38 @@ public class SearchPanel extends JPanel {
 	}
 	
 	/**
+	 * Initializes the search panel.
 	 * 
+	 * @author Joey Hunt
 	 */
 	private void initialize() {
+		sortByBox.addItemListener(e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED) {
+				// Old item value is not used.
+				firePropertyChange((String)(e.getItem()), e.getItem(), e.getItem());
+			}
+		});
+		
 		add(sortByBox);
 	}
 	
 	/**
+	 * Sets the selected item of the Sort By box 
+	 * and fires an ItemEvent if successful.
 	 * 
-	 * 
-	 * @param sort An integer corresponding to the total ordering of Projects to use.
-	 * @return
+	 * @author Joey Hunt
 	 */
-	public static int sortBy(int sort) {
-		return 0;
+	public void setSortBy(final String sortBy) {
+		sortByBox.setSelectedItem(sortBy);
 	}
 	
 	/**
+	 * Returns the selected sorting option.
 	 * 
-	 * @return
+	 * @author Joey Hunt
+	 * @return The sorting option.
 	 */
-	public static int getSortBy() {
-		return 0;
+	public String getSortBy() {
+		return (String)sortByBox.getSelectedItem();
 	}
 }
