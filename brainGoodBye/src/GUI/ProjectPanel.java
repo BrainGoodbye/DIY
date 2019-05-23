@@ -1,55 +1,55 @@
 package GUI;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 
 /**
  * @author Joey Hunt
  *
- * 
+ * This panel displays concise project information and allows for the searching and ordering 
+ * of this information.
  */
 public class ProjectPanel extends JPanel {
 
 	/**
-	 * A default serial UID.
+	 * A generated serial UID.
 	 */
 	private static final long serialVersionUID = -5768616998602501013L;
 	
 	/**
-	 * 
-	 */
-	private JScrollPane scrollPane;
-	
-	/**
-	 * 
+	 * A panel for finding and sorting project thumbnails.
 	 */
 	private JPanel searchPanel;
 	
 	/**
-	 * 
+	 * A panel which displays project thumbnails.
 	 */
 	private JPanel thumbnailPanel;
 
 	/**
+	 * @author Joey Hunt
 	 * 
+	 * Creates a project panel.
 	 */
 	ProjectPanel() {
-		scrollPane = new JScrollPane();
 		searchPanel = new SearchPanel();
-		thumbnailPanel = new JPanel();
+		thumbnailPanel = new ThumbnailPanel();
 		
 		initialize();
 	}
 	
 	/**
+	 * @author Joey Hunt
 	 * 
+	 * Initializes the project panel.
 	 */
 	private void initialize() {
-		thumbnailPanel.add(scrollPane);
-		
 		add(searchPanel);
 		add(thumbnailPanel);
+		
+		setBackground(Color.WHITE);
 	}
 	
 	public static int getSortBy() {
