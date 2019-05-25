@@ -47,6 +47,8 @@ public class HomeUI extends JFrame {
 		
 		this.add(new OptionsPanel(), BorderLayout.EAST);
 		
+		this.add(new ProjectPanel(), BorderLayout.CENTER);
+		
 		this.getContentPane().setBackground(Color.WHITE);
 		//You Can SEE ME NOW
 		this.setVisible(true);
