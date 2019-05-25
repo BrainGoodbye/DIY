@@ -19,10 +19,10 @@ public class OptionsPanel extends JPanel{
 	private static final long serialVersionUID = -4082397240874219557L;
 	
 	
-	PropertyChangeSupport Pcs;
+	private PropertyChangeSupport Pcs= new PropertyChangeSupport(this);
 	
 	public OptionsPanel() {
-		Pcs = new PropertyChangeSupport(this);
+		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JButton ExportSettings = new JButton("Export Settings");
 		ExportSettings.addActionListener(theEvent -> Pcs.firePropertyChange("ESettings",false,true));
@@ -41,12 +41,6 @@ public class OptionsPanel extends JPanel{
 		this.add(ImportProjects);
 		this.setBackground(Color.LIGHT_GRAY);
 	}
-	
-	  @Override
-	    public void addPropertyChangeListener(final PropertyChangeListener theListener) {
-	        Pcs.addPropertyChangeListener(theListener);
-	        
-	    }
 
 	    @Override
 	    public void addPropertyChangeListener(final String thePropertyName,
