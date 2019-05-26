@@ -4,6 +4,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,12 +32,15 @@ public final class FileManager implements PropertyChangeListener {
 	 */
 	private String mySettings;
 	
+	private String currentPath;
+	
 	/**
 	 * @author Thaddaeus
 	 */
 	public FileManager() {
 		// TODO Get intially selected sorting option directly, in case it changes.
 		mySettings = "Cost";
+		currentPath = ".";
 	}
 	
 	/**
@@ -43,14 +48,22 @@ public final class FileManager implements PropertyChangeListener {
 	 * 
 	 * @author Thaddaeus
 	 * @author Joey Hunt
+	 * @Author Hunter Lantz
 	 */
 	private void exportSettings() {
-		try (FileWriter fileWriter = new FileWriter("settings.txt");
-			    PrintWriter printWriter = new PrintWriter(fileWriter);) {
-		    printWriter.print(mySettings);
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Error: settings could not be exported.");
-		}
+			final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
+			int returnVal = chooser.showSaveDialog(null);
+			if(returnVal == JFileChooser.APPROVE_OPTION) {
+				File saved = chooser.getSelectedFile();
+				try {
+					BufferedWriter writer = new BufferedWriter(new FileWriter(saved));
+					writer.write(mySettings);
+					writer.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    }
 	}
 	
 	/**
@@ -58,13 +71,15 @@ public final class FileManager implements PropertyChangeListener {
 	 * 
 	 * @author Thaddaeus
 	 * @autho Joey Hunt
+	 * @author Hunter Lantz
 	 */
 	private void importSettings() {
-		final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
+		final JFileChooser chooser = new JFileChooser(currentPath);
 	    chooser.setFileFilter(new FileNameExtensionFilter("Text Files", "txt"));
 	    int returnVal = chooser.showOpenDialog(null);
 	    
 	    if(returnVal == JFileChooser.APPROVE_OPTION) {
+	    	currentPath = chooser.getCurrentDirectory().getAbsolutePath();
 			try (FileReader fr = new FileReader(chooser.getSelectedFile());
 	                BufferedReader br = new BufferedReader(fr)) {
 				pcs.firePropertyChange("Import Settings", null, br.readLine());
