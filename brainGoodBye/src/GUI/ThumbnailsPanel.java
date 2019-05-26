@@ -1,5 +1,7 @@
 package GUI;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +17,7 @@ import brainGoodBye.Project;
  * 
  * @author Joey Hunt
  */
-public class ThumbnailsPanel extends JPanel {
+public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 
 	/**
 	 * A generated serial UID.
@@ -81,6 +83,20 @@ public class ThumbnailsPanel extends JPanel {
 	}
 	
 	/**
+	 * 
+	 * 
+	 * @author Joey Hunt
+	 * @param thumbnail
+	 */
+	public void addThumbnail(final Thumbnail thumbnail) {
+		myThumbnails.add(thumbnail);
+		add(thumbnail);
+		
+		revalidate();
+		repaint();
+	}
+	
+	/**
 	 * Sorts the project thumbnails according to user selection.
 	 * 
 	 * @author Joey Hunt
@@ -95,5 +111,10 @@ public class ThumbnailsPanel extends JPanel {
 		}
 		
 		createThumbnails();
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		
 	}
 }

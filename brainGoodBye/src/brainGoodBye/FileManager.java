@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -38,6 +39,8 @@ public final class FileManager implements PropertyChangeListener {
 	
 	private String currentPath;
 	
+	private List<Project> myProjects;
+	
 	/**
 	 * @author Thaddaeus
 	 */
@@ -45,6 +48,7 @@ public final class FileManager implements PropertyChangeListener {
 		// TODO Get intially selected sorting option directly, in case it changes.
 		mySettings = "Cost";
 		currentPath = ".";
+		myProjects = new ArrayList<>();
 	}
 	
 	/**
@@ -99,8 +103,8 @@ public final class FileManager implements PropertyChangeListener {
 	 * and places it in a file for safe keeping.
 	 * @author Thaddaeus
 	 */
-	private final void exportAll(List<Project> projects) {
-		List<Project> object = projects;
+	private final void exportAll() {
+		//List<Project> object = projects;
 		
 		final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
 		int returnVal = chooser.showSaveDialog(null);
@@ -109,7 +113,7 @@ public final class FileManager implements PropertyChangeListener {
 			try {
 	            FileOutputStream file = new FileOutputStream(saved); 
 	            ObjectOutputStream byteStream = new ObjectOutputStream(file); 
-	            byteStream.writeObject(object); 
+	            byteStream.writeObject(myProjects); 
 	            byteStream.close(); 
 	            file.close();
 			} catch (IOException e) {
@@ -122,28 +126,28 @@ public final class FileManager implements PropertyChangeListener {
 	 * Gets the serialized, byte stream form of a project list from a file 
 	 * and converts it back to a usable project list.
 	 * @author Thaddaeus
+	 * @author Joey Hunt
 	 */
-	private final List<Project> importAll() {
-		List<Project> importedProjects = null; 
-		
+	private void importAll() {
 		final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
-		int returnVal = chooser.showSaveDialog(null);
+		int returnVal = chooser.showOpenDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
 			File saved = chooser.getSelectedFile();
 			try {
-	            FileInputStream file = new FileInputStream(saved); 
-	            ObjectInputStream in = new ObjectInputStream(file); 
-	            
-	    		@SuppressWarnings("unchecked") // not known for sure the type of the deserialized object
-	            List<Project> tempInputObject = (List<Project>) in.readObject();
-	    		importedProjects = tempInputObject;
-	            in.close(); 
-	            file.close(); 
+				FileInputStream file = new FileInputStream(saved); 
+				ObjectInputStream in = new ObjectInputStream(file); 
+
+				@SuppressWarnings("unchecked") // not known for sure the type of the deserialized object
+				List<Project> projects = (List<Project>) in.readObject();
+
+				pcs.firePropertyChange("Import All", null, projects);
+
+				in.close(); 
+				file.close(); 
 			} catch (IOException | ClassNotFoundException e) {
 				JOptionPane.showMessageDialog(null, "Error: file could not be read.");
 			}
-	    }
-        return importedProjects;
+		}
 	}
 	
 
@@ -182,6 +186,16 @@ public final class FileManager implements PropertyChangeListener {
 			exportSettings();
 		} else if ("ISettings".equals(theEvent.getPropertyName())) {
 			importSettings();
+		} else if ("EProjects".equals(theEvent.getPropertyName())) {
+			if (!myProjects.isEmpty()) {
+			exportAll();
+			} else {
+				//Message
+			}
+		} else if ("IProjects".equals(theEvent.getPropertyName())) {
+			importAll();
+		} else if ("Added Project".equals(theEvent.getPropertyName())) {
+			myProjects = (List<Project>)theEvent.getNewValue();
 		}
 	}
 

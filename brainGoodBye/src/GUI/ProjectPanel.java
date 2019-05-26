@@ -34,22 +34,28 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 	/**
 	 * A panel which displays project thumbnails.
 	 */
-	private JPanel thumbnailPanel;
+	private ThumbnailsPanel thumbnailPanel;
 	
 	/**
 	 * 
 	 */
 	private List<Project> myProjects;
+	
+	/**
+	 * 
+	 */
+	private FileManager myManager;
 
 	/**
 	 * Creates a project panel.
 	 * 
 	 * @author Joey Hunt
 	 */
-	ProjectPanel() {
+	ProjectPanel(final FileManager manager) {
 		searchPanel = new SearchPanel();
 		thumbnailPanel = new ThumbnailsPanel();
 		myProjects = new ArrayList<>();
+		myManager = manager;
 		
 		initialize();
 	}
@@ -60,48 +66,70 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 	 * @author Joey Hunt
 	 */
 	private void initialize() {
-		// Second instance of FileManager (first in HomeUI) for testing purposes.
-		FileManager fileManager = new FileManager();
-		
-		searchPanel.addPropertyChangeListener(fileManager);
+		searchPanel.addPropertyChangeListener(myManager);
 		
 		setLayout(new BorderLayout());
 		
 		add(searchPanel, BorderLayout.PAGE_START);
 		add(thumbnailPanel);
 		
-		// Test project
-		myProjects.add(new Project(new ArrayList<>(), new ArrayList<>(), 
-				"Test Project", "hello", "", 10.0, 20.0));
-		
-		thumbnailPanel.add(new Thumbnail(myProjects.get(0)));
-		
 		setBackground(Color.WHITE);
 	}
 	
-	/**
-	 * 
-	 * 
-	 * @author Joey Hunt
-	 * @return
-	 */
-	public List<Project> getProjects() {
-		return myProjects;
-	}
-	
-	/**
-	 * 
-	 * 
-	 * @author Joey Hunt
-	 * @param theProjects
-	 */
-	public void setProjects(final List<Project> theProjects) {
-		myProjects = theProjects;
-	}
+//	/**
+//	 * 
+//	 * 
+//	 * @author Joey Hunt
+//	 * @return
+//	 */
+//	public List<Project> getProjects() {
+//		return myProjects;
+//	}
+//	
+//	/**
+//	 * 
+//	 * 
+//	 * @author Joey Hunt
+//	 * @param theProjects
+//	 */
+//	public void setProjects(final List<Project> theProjects) {
+//		myProjects = theProjects;
+//	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void propertyChange(PropertyChangeEvent e) {
+		if ("New".equals(e.getPropertyName())) {
+			//TODO open an instance of ProjectView
+			final Project test = new Project(new ArrayList<>(), new ArrayList<>(), 
+					"Test Project", "hello", "", 10.0, 20.0);
+			
+			myProjects.add(test);
+			thumbnailPanel.addThumbnail(new Thumbnail(test));
+			
+			firePropertyChange("Added Project", null, myProjects);
+			
+			revalidate();
+			repaint();
+		} else if ("Delete".equals(e.getPropertyName())) {
+			//TODO delete a selected project
+			if (!myProjects.isEmpty()) {
+				myProjects.remove(0);
+				thumbnailPanel.removeAll();
+				
+				revalidate();
+				repaint();
+			}
+		} else if ("Import All".equals(e.getPropertyName())) {
+			myProjects = (List<Project>)e.getNewValue();
+			
+			thumbnailPanel.removeAll();
+			
+			for (final Project project: myProjects) {
+			thumbnailPanel.addThumbnail(new Thumbnail(project));
+			}
+			
+			revalidate();
+			repaint();
+		}
 	}
 }

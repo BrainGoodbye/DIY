@@ -25,6 +25,7 @@ public class OptionsPanel extends JPanel{
 	 * 
 	 * 
 	 * @author Hunter Lantz
+	 * @author Joey Hunt
 	 */
 	public OptionsPanel() {
 		
@@ -39,6 +40,12 @@ public class OptionsPanel extends JPanel{
 		ExportProjects.addActionListener(theEvent -> firePropertyChange("EProjects",false,true));
 		JButton ImportProjects = new JButton("Import Projects");
 		ImportProjects.addActionListener(theEvent -> firePropertyChange("IProjects",false,true));
+		//TODO Fully implement add and delete functions.
+		JButton addProject = new JButton("New Project");
+		addProject.addActionListener(theEvent -> firePropertyChange("New", false, true));
+		JButton deleteProject = new JButton("Delete");
+		deleteProject.addActionListener(theEvent -> firePropertyChange("Delete", false, true));
+		
 		this.add(ExportSettings);
 		this.add(Box.createRigidArea(new Dimension(5, 5)));
 		this.add(ImportSettings);
@@ -46,6 +53,10 @@ public class OptionsPanel extends JPanel{
 		this.add(ExportProjects);
 		this.add(Box.createRigidArea(new Dimension(5, 5)));
 		this.add(ImportProjects);
+		this.add(Box.createRigidArea(new Dimension(5, 5)));
+		this.add(addProject);
+		this.add(Box.createRigidArea(new Dimension(5, 5)));
+		this.add(deleteProject);
 		this.setBackground(Color.LIGHT_GRAY);
 	}
 
