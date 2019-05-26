@@ -74,7 +74,7 @@ public final class FileManager implements PropertyChangeListener {
 	 * Imports user settings from a file.
 	 * 
 	 * @author Thaddaeus
-	 * @autho Joey Hunt
+	 * @author Joey Hunt
 	 * @author Hunter Lantz
 	 */
 	private void importSettings() {

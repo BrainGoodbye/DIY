@@ -1,8 +1,12 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.event.ItemEvent;
+
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 /**
  * This panel allows players to sort and search for thumbnails.
@@ -25,7 +29,6 @@ public class SearchPanel extends JPanel {
 	 * A combo box containing sort options.
 	 */
 	private JComboBox<String> sortByBox;
-	
 	
 	/**
 	 * Creates a search panel.
@@ -52,6 +55,9 @@ public class SearchPanel extends JPanel {
 		});
 		
 		add(sortByBox);
+		
+		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		setBackground(Color.LIGHT_GRAY);
 	}
 	
 //	/**

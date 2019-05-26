@@ -1,11 +1,17 @@
 package GUI;
 
+import java.awt.Dimension;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 import brainGoodBye.Project;
 
 /**
- * This panel displays concise project information 
+ * This panel displays concise project information.
  * 
  * @author Joey Hunt
  */
@@ -29,6 +35,21 @@ public class Thumbnail extends JPanel {
 	Thumbnail(final Project project) {
 		myProject = project; 
 		
+		initialize();
+	}
+	
+	/**
+	 * 
+	 * @author Joey Hunt
+	 */
+	private void initialize() {
+		final JLabel name = new JLabel(myProject.getName());
+		
+		add(name);
+		
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		//setPreferredSize(new Dimension(200, 100));
 	}
 	
 	/**
