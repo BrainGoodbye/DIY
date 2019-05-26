@@ -6,10 +6,14 @@ import java.beans.PropertyChangeSupport;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -88,20 +92,62 @@ public final class FileManager implements PropertyChangeListener {
 			}
 	    }
 	}
+	
 
-//	/**
-//	 * @author Thaddaeus
-//	 */
-//	exportAll(List<Project> projects) {
-//		
-//	}
-//	
-//	/**
-//	 * @author Thaddaeus
-//	 */
-//	List<Project> importAll() {
-//		
-//	}
+	/**
+	 * Converts a list of projects to a serialized byte stream 
+	 * and places it in a file for safe keeping.
+	 * @author Thaddaeus
+	 */
+	private final void exportAll(List<Project> projects) {
+		List<Project> object = projects;
+		
+		final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
+		int returnVal = chooser.showSaveDialog(null);
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+			File saved = chooser.getSelectedFile();
+			try {
+	            FileOutputStream file = new FileOutputStream(saved); 
+	            ObjectOutputStream byteStream = new ObjectOutputStream(file); 
+	            byteStream.writeObject(object); 
+	            byteStream.close(); 
+	            file.close();
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, "Error: file could not be read.");
+			}
+	    }	
+	}
+	
+	/**
+	 * Gets the serialized, byte stream form of a project list from a file 
+	 * and converts it back to a usable project list.
+	 * @author Thaddaeus
+	 */
+	private final List<Project> importAll() {
+		List<Project> importedProjects = null; 
+		
+		final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
+		int returnVal = chooser.showSaveDialog(null);
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+			File saved = chooser.getSelectedFile();
+			try {
+	            FileInputStream file = new FileInputStream(saved); 
+	            ObjectInputStream in = new ObjectInputStream(file); 
+	            
+	    		@SuppressWarnings("unchecked") // not known for sure the type of the deserialized object
+	            List<Project> tempInputObject = (List<Project>) in.readObject();
+	    		importedProjects = tempInputObject;
+	            in.close(); 
+	            file.close(); 
+			} catch (IOException | ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "Error: file could not be read.");
+			}
+	    }
+        return importedProjects;
+	}
+	
+
+	
 	
     public void addPropertyChangeListener(final String thePropertyName,
                                           final PropertyChangeListener theListener) {
