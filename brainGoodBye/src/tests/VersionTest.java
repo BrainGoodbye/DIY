@@ -1,4 +1,4 @@
-package brainGoodBye;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import org.junit.Test;
+
+import brainGoodBye.Version;
 
 /**
  * @author Joey Hunt

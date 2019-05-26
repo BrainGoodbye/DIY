@@ -22,24 +22,42 @@ public class HomeUI extends JFrame {
 	/**
 	 * A menu bar for the program.
 	 */
-	final TheMenuBar menuBar;
+	private final TheMenuBar menuBar;
 	
-	final OptionsPanel optionsPanel;
+	/**
+	 * 
+	 */
+	private final OptionsPanel optionsPanel;
 	
-	final FileManager fileManager;
+	/**
+	 * 
+	 */
+	private final FileManager fileManager;
+	
+	/**
+	 * 
+	 */
+	private final ProjectPanel projectPanel;
 	
 	/**
 	 * Initializes the home UI of the program.
+	 * 
+	 * @author Jacob Ficker
+	 * @author Joey Hunt
 	 */
 	public HomeUI() {
 		super("Team BrainGoodbye DIY");
 		menuBar = new TheMenuBar();
-		optionsPanel = new OptionsPanel();
 		fileManager = new FileManager();
+		optionsPanel = new OptionsPanel();
+		projectPanel = new ProjectPanel(fileManager);
 	}
 	
 	/**
 	 * Starts the GUI.
+	 * 
+	 * @author Jacob Ficker
+	 * @author Joey Hunt
 	 */
 	public void start() {
 		//Basic setup
@@ -51,13 +69,16 @@ public class HomeUI extends JFrame {
         menuBar.initialize();
         
         optionsPanel.addPropertyChangeListener(fileManager);
+        optionsPanel.addPropertyChangeListener(projectPanel);
+        projectPanel.addPropertyChangeListener("Added Project", fileManager);
+        fileManager.addPropertyChangeListener("Import All", projectPanel);
         
         //Add Stuff
 		this.setJMenuBar(menuBar);
 		
 		this.add(optionsPanel, BorderLayout.EAST);
 		
-		this.add(new ProjectPanel(), BorderLayout.CENTER);
+		this.add(projectPanel, BorderLayout.CENTER);
 		
 		this.getContentPane().setBackground(Color.WHITE);
 		//You Can SEE ME NOW
