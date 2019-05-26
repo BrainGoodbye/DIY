@@ -25,9 +25,11 @@ public class OptionsPanel extends JPanel{
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JButton ExportSettings = new JButton("Export Settings");
-		ExportSettings.addActionListener(theEvent -> Pcs.firePropertyChange("ESettings",false,true));
+		// Hunter: for what ever reason, these buttons only work for me when I call
+		// JPanel's native firePropertyChange without using the pcs. Joey
+		ExportSettings.addActionListener(theEvent -> firePropertyChange("ESettings",false,true));
 		JButton ImportSettings = new JButton("Import Settings");
-		ImportSettings.addActionListener(theEvent -> Pcs.firePropertyChange("ISettings",false,true));
+		ImportSettings.addActionListener(theEvent -> firePropertyChange("ISettings",false,true));
 		JButton ExportProjects = new JButton("Export Projects");
 		ExportProjects.addActionListener(theEvent -> Pcs.firePropertyChange("EProjects",false,true));
 		JButton ImportProjects = new JButton("Import Projects");

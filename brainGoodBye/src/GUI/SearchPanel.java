@@ -5,14 +5,14 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
- * 
+ * This panel allows players to sort and search for thumbnails.
  *
  * @author Joey Hunt
  */
 public class SearchPanel extends JPanel {
 
 	/**
-	 * 
+	 * A generated serial UID.
 	 */
 	private static final long serialVersionUID = 9015600827675719527L;
 	
@@ -22,7 +22,7 @@ public class SearchPanel extends JPanel {
 	private static final String[] sortOptions = {"Cost"};
 	
 	/**
-	 * 
+	 * A combo box containing sort options.
 	 */
 	private JComboBox<String> sortByBox;
 	
@@ -47,22 +47,22 @@ public class SearchPanel extends JPanel {
 		sortByBox.addItemListener(e -> {
 			if (e.getStateChange() == ItemEvent.SELECTED) {
 				// Old item value is not used.
-				firePropertyChange((String)(e.getItem()), e.getItem(), e.getItem());
+				firePropertyChange("Sort", null, e.getItem());
 			}
 		});
 		
 		add(sortByBox);
 	}
 	
-	/**
-	 * Sets the selected item of the Sort By box 
-	 * and fires an ItemEvent if successful.
-	 * 
-	 * @author Joey Hunt
-	 */
-	public void setSortBy(final String sortBy) {
-		sortByBox.setSelectedItem(sortBy);
-	}
+//	/**
+//	 * Sets the selected item of the Sort By box 
+//	 * and fires an ItemEvent if successful.
+//	 * 
+//	 * @author Joey Hunt
+//	 */
+//	public void setSortBy(final String sortBy) {
+//		sortByBox.setSelectedItem(sortBy);
+//	}
 	
 	/**
 	 * Returns the selected sorting option.
@@ -70,7 +70,7 @@ public class SearchPanel extends JPanel {
 	 * @author Joey Hunt
 	 * @return The sorting option.
 	 */
-	public String getSortBy() {
+	public String getSelectedSort() {
 		return (String)sortByBox.getSelectedItem();
 	}
 }

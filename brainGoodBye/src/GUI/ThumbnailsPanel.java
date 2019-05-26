@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
-import brainGoodBye.Thumbnail;
 
 /**
  * This panel contains the concise views of projects.
  * 
  * @author Joey Hunt
  */
-public class ThumbnailPanel extends JPanel {
+public class ThumbnailsPanel extends JPanel {
 
 	/**
 	 * A generated serial UID.
@@ -29,16 +28,16 @@ public class ThumbnailPanel extends JPanel {
 	/**
 	 * A list of concise project views.
 	 */
-	private List<Thumbnail> thumbnails;
+	private List<Thumbnail> myThumbnails;
 	
 	/**
 	 * Creates the thumbnail panel.
 	 * 
 	 * @author Joey Hunt
 	 */
-	ThumbnailPanel() {
+	ThumbnailsPanel() {
 		scrollPane = new JScrollPane();
-		thumbnails = new ArrayList<>();
+		myThumbnails = new ArrayList<>();
 		
 		initialize();
 	}
@@ -49,7 +48,22 @@ public class ThumbnailPanel extends JPanel {
 	 * @author Joey Hunt
 	 */
 	private void initialize() {
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
 		add(scrollPane);
+		
+		createThumbnails();
+	}
+	
+	/**
+	 * Adds each thumbnail to the panel.
+	 * 
+	 * @author Joey Hunt
+	 */
+	private void createThumbnails() {
+		for (final Thumbnail thumbnail: myThumbnails) {
+			add(thumbnail);
+		}
 	}
 	
 	/**
@@ -61,9 +75,11 @@ public class ThumbnailPanel extends JPanel {
 	public void sortBy(final String selection) {
 		switch(selection) {
 		case "Cost":
-			Collections.sort(thumbnails, (t1, t2) -> {
+			Collections.sort(myThumbnails, (t1, t2) -> {
 				return (int) (t1.getProject().getCostPerMonth() - t2.getProject().getCostPerMonth());
 			});
 		}
+		
+		createThumbnails();
 	}
 }

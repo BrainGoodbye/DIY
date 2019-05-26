@@ -5,10 +5,12 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
+import brainGoodBye.FileManager;
+
 /**
- * @author Jacob Ficker
- * 
  * This class represents the initial UI of the program.
+ * 
+ * @author Jacob Ficker
  */
 public class HomeUI extends JFrame {
 
@@ -22,12 +24,18 @@ public class HomeUI extends JFrame {
 	 */
 	final TheMenuBar menuBar;
 	
+	final OptionsPanel optionsPanel;
+	
+	final FileManager fileManager;
+	
 	/**
 	 * Initializes the home UI of the program.
 	 */
 	public HomeUI() {
 		super("Team BrainGoodbye DIY");
 		menuBar = new TheMenuBar();
+		optionsPanel = new OptionsPanel();
+		fileManager = new FileManager();
 	}
 	
 	/**
@@ -42,10 +50,12 @@ public class HomeUI extends JFrame {
 		
         menuBar.initialize();
         
+        optionsPanel.addPropertyChangeListener(fileManager);
+        
         //Add Stuff
 		this.setJMenuBar(menuBar);
 		
-		this.add(new OptionsPanel(), BorderLayout.EAST);
+		this.add(optionsPanel, BorderLayout.EAST);
 		
 		this.add(new ProjectPanel(), BorderLayout.CENTER);
 		

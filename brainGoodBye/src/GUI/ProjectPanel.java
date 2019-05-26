@@ -1,15 +1,19 @@
 package GUI;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import brainGoodBye.FileManager;
+import brainGoodBye.Project;
+
 
 /**
- * @author Joey Hunt
- *
  * This panel displays concise project information and allows for the searching and ordering 
  * of this information.
+ * 
+ * @author Joey Hunt
  */
 public class ProjectPanel extends JPanel {
 
@@ -27,36 +31,41 @@ public class ProjectPanel extends JPanel {
 	 * A panel which displays project thumbnails.
 	 */
 	private JPanel thumbnailPanel;
+	
+	
 
 	/**
-	 * @author Joey Hunt
-	 * 
 	 * Creates a project panel.
+	 * 
+	 * @author Joey Hunt
 	 */
 	ProjectPanel() {
 		searchPanel = new SearchPanel();
-		thumbnailPanel = new ThumbnailPanel();
+		thumbnailPanel = new ThumbnailsPanel();
 		
 		initialize();
 	}
 	
 	/**
-	 * @author Joey Hunt
-	 * 
 	 * Initializes the project panel.
+	 * 
+	 * @author Joey Hunt
 	 */
 	private void initialize() {
+		// Second instance of FileManager (first in HomeUI) for testing purposes.
+		FileManager fileManager = new FileManager();
+		
+		searchPanel.addPropertyChangeListener(fileManager);
+		
 		add(searchPanel);
 		add(thumbnailPanel);
 		
-		setBackground(Color.WHITE);
-	}
-	
-	public static int getSortBy() {
-		return 1;
-	}
-	
-	public static void setSortBy(int attributeNumber) {
+//		// Test project
+//		final Project dummy = new Project(new ArrayList<>(), new ArrayList<>(), 
+//				"Example", "hi", "", 10.0, 20.0);
+//		
+//		thumbnailPanel.add(new Thumbnail(dummy));
 		
+		setBackground(Color.WHITE);
 	}
 }
