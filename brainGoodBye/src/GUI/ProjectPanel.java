@@ -1,7 +1,11 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -15,7 +19,7 @@ import brainGoodBye.Project;
  * 
  * @author Joey Hunt
  */
-public class ProjectPanel extends JPanel {
+public class ProjectPanel extends JPanel implements PropertyChangeListener {
 
 	/**
 	 * A generated serial UID.
@@ -32,7 +36,10 @@ public class ProjectPanel extends JPanel {
 	 */
 	private JPanel thumbnailPanel;
 	
-	
+	/**
+	 * 
+	 */
+	private List<Project> myProjects;
 
 	/**
 	 * Creates a project panel.
@@ -42,6 +49,7 @@ public class ProjectPanel extends JPanel {
 	ProjectPanel() {
 		searchPanel = new SearchPanel();
 		thumbnailPanel = new ThumbnailsPanel();
+		myProjects = new ArrayList<>();
 		
 		initialize();
 	}
@@ -57,15 +65,43 @@ public class ProjectPanel extends JPanel {
 		
 		searchPanel.addPropertyChangeListener(fileManager);
 		
-		add(searchPanel);
+		setLayout(new BorderLayout());
+		
+		add(searchPanel, BorderLayout.PAGE_START);
 		add(thumbnailPanel);
 		
-//		// Test project
-//		final Project dummy = new Project(new ArrayList<>(), new ArrayList<>(), 
-//				"Example", "hi", "", 10.0, 20.0);
-//		
-//		thumbnailPanel.add(new Thumbnail(dummy));
+		// Test project
+		myProjects.add(new Project(new ArrayList<>(), new ArrayList<>(), 
+				"Test Project", "hello", "", 10.0, 20.0));
+		
+		thumbnailPanel.add(new Thumbnail(myProjects.get(0)));
 		
 		setBackground(Color.WHITE);
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @author Joey Hunt
+	 * @return
+	 */
+	public List<Project> getProjects() {
+		return myProjects;
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @author Joey Hunt
+	 * @param theProjects
+	 */
+	public void setProjects(final List<Project> theProjects) {
+		myProjects = theProjects;
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

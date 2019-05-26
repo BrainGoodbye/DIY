@@ -21,6 +21,11 @@ public class OptionsPanel extends JPanel{
 	
 	private PropertyChangeSupport Pcs= new PropertyChangeSupport(this);
 	
+	/**
+	 * 
+	 * 
+	 * @author Hunter Lantz
+	 */
 	public OptionsPanel() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -31,9 +36,9 @@ public class OptionsPanel extends JPanel{
 		JButton ImportSettings = new JButton("Import Settings");
 		ImportSettings.addActionListener(theEvent -> firePropertyChange("ISettings",false,true));
 		JButton ExportProjects = new JButton("Export Projects");
-		ExportProjects.addActionListener(theEvent -> Pcs.firePropertyChange("EProjects",false,true));
+		ExportProjects.addActionListener(theEvent -> firePropertyChange("EProjects",false,true));
 		JButton ImportProjects = new JButton("Import Projects");
-		ImportProjects.addActionListener(theEvent -> Pcs.firePropertyChange("IProjects",false,true));
+		ImportProjects.addActionListener(theEvent -> firePropertyChange("IProjects",false,true));
 		this.add(ExportSettings);
 		this.add(Box.createRigidArea(new Dimension(5, 5)));
 		this.add(ImportSettings);

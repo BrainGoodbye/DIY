@@ -8,6 +8,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import brainGoodBye.Project;
+
 /**
  * This panel contains the concise views of projects.
  * 
@@ -26,7 +28,7 @@ public class ThumbnailsPanel extends JPanel {
 	private JScrollPane scrollPane;
 	
 	/**
-	 * A list of concise project views.
+	 * A list of thumbnails.
 	 */
 	private List<Thumbnail> myThumbnails;
 	
@@ -42,15 +44,27 @@ public class ThumbnailsPanel extends JPanel {
 		initialize();
 	}
 	
+//	/**
+//	 * Creates the thumbnail panel.
+//	 * 
+//	 * @author Joey Hunt
+//	 */
+//	ThumbnailsPanel(final List<Project> theProjects) {
+//		scrollPane = new JScrollPane();
+//		myProjects = new ArrayList<>();
+//		
+//		initialize();
+//	}
+	
 	/**
 	 * Initializes the thumbnail panel.
 	 * 
 	 * @author Joey Hunt
 	 */
 	private void initialize() {
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		add(scrollPane);
+		//add(scrollPane);
 		
 		createThumbnails();
 	}
