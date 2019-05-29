@@ -3,6 +3,8 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -38,8 +40,9 @@ public class Thumbnail extends JPanel {
 	Thumbnail(final Project project) {
 		myProject = project; 
 		this.setLayout(new BorderLayout());
-		this.setBackground(Color.white);
+		this.setBackground(Color.pink);
 		initialize();
+		this.setMaximumSize(new Dimension(4000,100));
 	}
 	
 	/**
@@ -71,15 +74,17 @@ public class Thumbnail extends JPanel {
 		JPanel oPanel = new JPanel();
 		oPanel.setBackground(Color.LIGHT_GRAY);
 		oPanel.setLayout(new BoxLayout(oPanel, BoxLayout.X_AXIS));
-		JLabel date = new JLabel("Last Modified ");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		JLabel date = new JLabel("Last Modified "+dateFormat.format(myProject.getLastModified()));
 		date.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		oPanel.add(date);
 		oPanel.add(Box.createRigidArea(new Dimension(20,0)));
-		JLabel df = new JLabel("SL: ");
+		JLabel df = new JLabel("SL: "+myProject.getDifficulty());
 		df.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		oPanel.add(df);
 		oPanel.add(Box.createRigidArea(new Dimension(20,0)));
-		JLabel size = new JLabel("Size ");
+		JLabel size = new JLabel("Size "+myProject.getSize());
+		size.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		oPanel.add(size);
 		
 		
