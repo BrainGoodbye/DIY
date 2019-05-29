@@ -34,6 +34,7 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	 */
 	private List<Thumbnail> myThumbnails;
 	
+	
 	/**
 	 * Creates the thumbnail panel.
 	 * 
@@ -42,7 +43,6 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	ThumbnailsPanel() {
 		scrollPane = new JScrollPane();
 		myThumbnails = new ArrayList<>();
-		
 		initialize();
 	}
 	
@@ -90,7 +90,19 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	 */
 	public void addThumbnail(final Thumbnail thumbnail) {
 		myThumbnails.add(thumbnail);
+		for(Thumbnail thumb: myThumbnails) {
+			thumb.addPropertyChangeListener(thumbnail);
+			thumbnail.addPropertyChangeListener(thumb);
+		}
 		add(thumbnail);
+		
+		revalidate();
+		repaint();
+	}
+	
+	public void removeThumbnail(Thumbnail thumbnail) {
+		myThumbnails.remove(thumbnail);
+		this.remove(thumbnail);
 		
 		revalidate();
 		repaint();

@@ -19,7 +19,14 @@ public class OptionsPanel extends JPanel{
 	private static final long serialVersionUID = -4082397240874219557L;
 	
 	
+	
+	
+	private Thumbnail mySelected;
+	
+	
 	private PropertyChangeSupport Pcs= new PropertyChangeSupport(this);
+	
+	private JButton deleteButton;
 	
 	/**
 	 * 
@@ -43,8 +50,12 @@ public class OptionsPanel extends JPanel{
 		//TODO Fully implement add and delete functions.
 		JButton addProject = new JButton("New Project");
 		addProject.addActionListener(theEvent -> firePropertyChange("New", false, true));
-		JButton deleteProject = new JButton("Delete");
-		deleteProject.addActionListener(theEvent -> firePropertyChange("Delete", false, true));
+		deleteButton = new JButton("Delete");
+		deleteButton.addActionListener(theEvent -> {
+			firePropertyChange("Delete", false, mySelected);
+			((JButton)theEvent.getSource()).setEnabled(false);
+		});
+		deleteButton.setEnabled(false);
 		
 		this.add(ExportSettings);
 		this.add(Box.createRigidArea(new Dimension(5, 5)));
@@ -56,8 +67,13 @@ public class OptionsPanel extends JPanel{
 		this.add(Box.createRigidArea(new Dimension(5, 5)));
 		this.add(addProject);
 		this.add(Box.createRigidArea(new Dimension(5, 5)));
-		this.add(deleteProject);
+		this.add(deleteButton);
 		this.setBackground(Color.LIGHT_GRAY);
+	}
+	
+	public void setSelected(Thumbnail selected) {
+		mySelected = selected;
+		deleteButton.setEnabled(true);
 	}
 
 	    @Override

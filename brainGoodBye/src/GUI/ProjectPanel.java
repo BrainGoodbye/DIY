@@ -48,18 +48,20 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 	 * 
 	 */
 	private FileManager myManager;
+	
+	private OptionsPanel myOptions;
 
 	/**
 	 * Creates a project panel.
 	 * 
 	 * @author Joey Hunt
 	 */
-	ProjectPanel(final FileManager manager) {
+	ProjectPanel(final FileManager manager, OptionsPanel options) {
 		searchPanel = new SearchPanel();
 		thumbnailPanel = new ThumbnailsPanel();
 		myProjects = new ArrayList<>();
 		myManager = manager;
-		
+		myOptions = options;
 		initialize();
 	}
 	
@@ -110,17 +112,17 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 					"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big");
 			
 			myProjects.add(test);
-			thumbnailPanel.addThumbnail(new Thumbnail(test));
+			thumbnailPanel.addThumbnail(new Thumbnail(test, myOptions));
 			
 			firePropertyChange("Added Project", null, myProjects);
 			
 			revalidate();
 			repaint();
 		} else if ("Delete".equals(e.getPropertyName())) {
-			//TODO delete a selected project
+			Thumbnail thumb = (Thumbnail)e.getNewValue();
 			if (!myProjects.isEmpty()) {
-				myProjects.remove(0);
-				thumbnailPanel.removeAll();
+				myProjects.remove(thumb.getProject());
+				thumbnailPanel.removeThumbnail(thumb);
 				
 				revalidate();
 				repaint();
@@ -131,7 +133,7 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 			thumbnailPanel.removeAll();
 			
 			for (final Project project: myProjects) {
-			thumbnailPanel.addThumbnail(new Thumbnail(project));
+			thumbnailPanel.addThumbnail(new Thumbnail(project, myOptions));
 			}
 			
 			revalidate();

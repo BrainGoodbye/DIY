@@ -3,6 +3,10 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -20,7 +24,7 @@ import brainGoodBye.Project;
  * 
  * @author Joey Hunt
  */
-public class Thumbnail extends JPanel {
+public class Thumbnail extends JPanel implements MouseListener, PropertyChangeListener {
 	
 	/**
 	 * A generated serial UID.
@@ -32,17 +36,23 @@ public class Thumbnail extends JPanel {
 	 */
 	private Project myProject;
 	
+	private OptionsPanel myOptions;
+	
+	private Color myColor= Color.pink;
+	
 	/**
 	 * Creates a thumbnail.
 	 * 
 	 * @author Joey Hunt
 	 */
-	Thumbnail(final Project project) {
+	Thumbnail(final Project project, OptionsPanel options) {
 		myProject = project; 
+		myOptions=options;
 		this.setLayout(new BorderLayout());
-		this.setBackground(Color.pink);
+		this.setBackground(myColor);
 		initialize();
 		this.setMaximumSize(new Dimension(4000,100));
+		this.addMouseListener(this);
 	}
 	
 	/**
@@ -104,5 +114,49 @@ public class Thumbnail extends JPanel {
 	 */
 	public Project getProject() {
 		return myProject;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		this.setBackground(Color.BLUE);	
+		myColor=Color.blue;
+		this.firePropertyChange("DClick", false, true);
+		myOptions.setSelected(this);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		this.setBackground(Color.red);
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		this.setBackground(myColor);
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent e) {
+		if("DClick".equals(e.getPropertyName())) {
+			if(e.getSource()!=this) {
+				myColor=Color.pink;
+				this.setBackground(myColor);
+			}
+			
+		}
+		
 	}
 }
