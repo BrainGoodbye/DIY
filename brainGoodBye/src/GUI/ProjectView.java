@@ -124,5 +124,12 @@ public class ProjectView extends JFrame {
         setVisible(true);
 	}
 	
-	
+	/**
+	 * 
+	 * @author Joey Hunt
+	 * @return
+	 */
+	public ProjectViewListener getViewListener() {
+		return viewListener;
+	}
 }

@@ -3,11 +3,15 @@ package GUI;
 import java.awt.BorderLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import brainGoodBye.Project;
 
 /**
  * 
@@ -58,7 +62,8 @@ public class RightViewPanel extends JPanel {
 		JButton budgetButton = new JButton("Edit");
 		
 		budgetButton.addActionListener(e -> {
-			new BudgetEditWindow();
+			new BudgetEditWindow(new Project(new ArrayList<>(), new ArrayList<>(), 
+					"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big"));
 		});
 		
 		JButton saveQuitButton = new JButton("Save & Quit");

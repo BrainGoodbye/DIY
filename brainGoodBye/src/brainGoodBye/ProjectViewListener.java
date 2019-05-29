@@ -26,6 +26,12 @@ public class ProjectViewListener implements PropertyChangeListener {
 		pcs = new PropertyChangeSupport(this);
 	}
 	
+	/**
+	 * 
+	 * @author Joey Hunt
+	 * @param thePropertyName
+	 * @param theListener
+	 */
     public void addPropertyChangeListener(final String thePropertyName,
                                           final PropertyChangeListener theListener) {
         pcs.addPropertyChangeListener(thePropertyName, theListener);
@@ -39,7 +45,6 @@ public class ProjectViewListener implements PropertyChangeListener {
 			myProject.setDescription((String)e.getNewValue());
 		} else if ("Save Project".equals(e.getPropertyName())) {
 			pcs.firePropertyChange("Added Project", null, myProject);
-		}
+		} 
 	}
-
 }
