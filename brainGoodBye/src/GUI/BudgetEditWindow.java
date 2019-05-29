@@ -56,7 +56,6 @@ public class BudgetEditWindow extends AbstractEditWindow {
 		this.add(savingsPerMonthTextField);
 		this.add(previousCostPerMonthLabel);
 		this.add(costPerMonthTextField);
-		this.setVisible(true);
 		save();
 	}
 	
