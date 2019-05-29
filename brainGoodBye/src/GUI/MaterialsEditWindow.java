@@ -29,7 +29,7 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 		initialize();
 	}
 	
-	@Override
+	
 	public void initialize() {
 		
 		ArrayList<Material> theList = (ArrayList<Material>) myProject.getMaterialListCopy();
