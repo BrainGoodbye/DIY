@@ -70,6 +70,18 @@ public class Project implements Serializable {
 		tasks = list;
 	}
 	
+	public void setModified(Date theDate) {
+		lastModified = (Date) theDate.clone();
+	}
+	 
+	public void setSize(String s) {
+		size = s;
+	}
+	
+	public void setDifficulty(String d) {
+		skill = d;
+	}
+	
 	public void addTask(Task t) {
 		tasks.add(t);
 	}
@@ -128,7 +140,18 @@ public class Project implements Serializable {
 		return imageFile;
 	}
 
+	public String getSize() {
+		return size;
+	}
 
+	public String getDifficulty() {
+		return skill;
+	}
+	
+	public Date getLastModified() {
+		return lastModified;
+	}
+	
 	public Double getSavingsPerMonth() {
 		return savingsPerMonth;
 	}
