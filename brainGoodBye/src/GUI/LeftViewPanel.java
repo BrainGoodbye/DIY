@@ -50,17 +50,20 @@ public class LeftViewPanel extends JPanel {
 	
 	private JPanel tasksEditPanel;
 	
+	private Project myProject;
+	
 	/**
 	 * Creates a LeftViewPanel.
 	 * 
 	 * @author Joey Hunt
 	 */
-	public LeftViewPanel() {
+	public LeftViewPanel(final Project theProject) {
 		namePanel = new JPanel();
 		descriptionEditPanel = new JPanel();
 		descriptionPanel = new JPanel();
 		materialsEditPanel = new JPanel();
 		tasksEditPanel = new JPanel();
+		myProject = theProject;
 		
 		initialize();
 	}
@@ -108,15 +111,14 @@ public class LeftViewPanel extends JPanel {
 		JButton materialsButton = new JButton(CHANGE_OPTION);
 		
 		materialsButton.addActionListener(e -> {
-			new MaterialsEditWindow(new Project(new ArrayList<>(), new ArrayList<>(), 
-					"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big"));
+			new MaterialsEditWindow(myProject);
 		});
 		
 		JLabel tasksLabel = new JLabel("Task List");
 		JButton tasksButton = new JButton(CHANGE_OPTION);
 		
 		tasksButton.addActionListener(e -> {
-			new TaskListEditWindow();
+			new TaskListEditWindow(myProject);
 		});
 		
 		namePanel.add(nameField);

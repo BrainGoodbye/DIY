@@ -40,15 +40,18 @@ public class RightViewPanel extends JPanel {
 	 */
 	private JPanel innerSavePanel;
 	
+	private Project myProject;
+	
 	/**
 	 * 
 	 * 
 	 * @author Joey Hunt
 	 */
-	public RightViewPanel() {
+	public RightViewPanel(final Project theProject) {
 		budgetEditPanel = new JPanel();
 		savePanel = new JPanel();
 		innerSavePanel = new JPanel();
+		myProject = theProject;
 		
 		initialize();
 	}
@@ -62,8 +65,7 @@ public class RightViewPanel extends JPanel {
 		JButton budgetButton = new JButton("Edit");
 		
 		budgetButton.addActionListener(e -> {
-			new BudgetEditWindow(new Project(new ArrayList<>(), new ArrayList<>(), 
-					"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big"));
+			new BudgetEditWindow(myProject);
 		});
 		
 		JButton saveButton = new JButton("Save");
