@@ -26,7 +26,7 @@ public abstract class AbstractEditWindow extends JFrame implements EditWindow{
 		//Experimental
 		this.setVisible(true);
 		this.setUndecorated(true);
-		this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+//		this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(400, 400);
 	}
