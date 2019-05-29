@@ -66,20 +66,24 @@ public class RightViewPanel extends JPanel {
 					"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big"));
 		});
 		
-		JButton saveQuitButton = new JButton("Save & Quit");
+		JButton saveButton = new JButton("Save");
 		
-		saveQuitButton.addActionListener(e -> {
+		saveButton.addActionListener(e -> {
 			//TODO don't make this a property change
 			firePropertyChange("Save Project", false, true);
+			
 		});
 		
 		budgetEditPanel.add(budgetLabel);
 		budgetEditPanel.add(budgetButton);
+		
+		innerSavePanel.add(saveButton);
 		
 		savePanel.setLayout(new BorderLayout());
 		savePanel.add(innerSavePanel, BorderLayout.SOUTH);
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
 		add(budgetEditPanel);
+		add(savePanel);
 	}
 }
