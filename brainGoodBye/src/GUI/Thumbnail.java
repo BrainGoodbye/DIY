@@ -23,6 +23,7 @@ import brainGoodBye.Project;
  * This panel displays concise project information.
  * 
  * @author Joey Hunt
+ * @author Hunter Lantz
  */
 public class Thumbnail extends JPanel implements MouseListener, PropertyChangeListener {
 	
@@ -44,6 +45,7 @@ public class Thumbnail extends JPanel implements MouseListener, PropertyChangeLi
 	 * Creates a thumbnail.
 	 * 
 	 * @author Joey Hunt
+	 * @author Hunter Lantz
 	 */
 	Thumbnail(final Project project, OptionsPanel options) {
 		myProject = project; 
@@ -56,7 +58,7 @@ public class Thumbnail extends JPanel implements MouseListener, PropertyChangeLi
 	}
 	
 	/**
-	 * 
+	 * @author Hunter Lantz
 	 * @author Joey Hunt
 	 */
 	private void initialize() {
@@ -116,6 +118,9 @@ public class Thumbnail extends JPanel implements MouseListener, PropertyChangeLi
 		return myProject;
 	}
 
+	/**
+	 * @Author for all mouse events Hunter
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		this.setBackground(Color.BLUE);	
@@ -126,7 +131,10 @@ public class Thumbnail extends JPanel implements MouseListener, PropertyChangeLi
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		this.setBackground(Color.red);
+		if(myColor != Color.blue) {
+			this.setBackground(Color.red);
+		}
+		
 		
 	}
 
@@ -148,6 +156,9 @@ public class Thumbnail extends JPanel implements MouseListener, PropertyChangeLi
 		
 	}
 
+	/**
+	 * @Author Hunter
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		if("DClick".equals(e.getPropertyName())) {

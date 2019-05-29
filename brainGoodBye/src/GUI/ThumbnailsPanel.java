@@ -84,7 +84,7 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	
 	/**
 	 * 
-	 * 
+	 * @author Hunter
 	 * @author Joey Hunt
 	 * @param thumbnail
 	 */
@@ -99,7 +99,10 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 		revalidate();
 		repaint();
 	}
-	
+	/**
+	 * @author Hunter
+	 * @param thumbnail thumbnail to remove
+	 */
 	public void removeThumbnail(Thumbnail thumbnail) {
 		myThumbnails.remove(thumbnail);
 		this.remove(thumbnail);
@@ -110,23 +113,33 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	
 	/**
 	 * Sorts the project thumbnails according to user selection.
-	 * 
+	 * @author Hunter
 	 * @author Joey Hunt
 	 * @param selection A String corresponding to the total ordering of Thumbnails to use.
 	 */
 	public void sortBy(final String selection) {
+		this.removeAll();
 		switch(selection) {
 		case "Cost":
 			Collections.sort(myThumbnails, (t1, t2) -> {
 				return (int) (t1.getProject().getCostPerMonth() - t2.getProject().getCostPerMonth());
+			});
+		case "Name":
+			Collections.sort(myThumbnails, (t1, t2) -> {
+				return (int) (t1.getProject().getName().compareTo(t2.getProject().getName()));
 			});
 		}
 		
 		createThumbnails();
 	}
 
+	/**
+	 * @Author Hunter
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		
+		if("Sort".equals(evt.getPropertyName())) {
+			sortBy((String) evt.getNewValue());
+		}
 	}
 }
