@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -62,6 +64,8 @@ public class ProjectView extends JFrame {
 	
 	private ProjectViewListener viewListener;
 	
+	private Project myProject;
+	
 //    /**
 //     * Starts the GUI.
 //     * 
@@ -83,8 +87,10 @@ public class ProjectView extends JFrame {
 	 */
 	public ProjectView() {
 		super("Project View");
-		leftPanel = new LeftViewPanel();
-		rightPanel = new RightViewPanel();
+		myProject = new Project(new ArrayList<>(), new ArrayList<>(), 
+						"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big");
+		leftPanel = new LeftViewPanel(myProject);
+		rightPanel = new RightViewPanel(myProject);
 		viewListener = new ProjectViewListener();
 		
 		initialize();
@@ -107,7 +113,6 @@ public class ProjectView extends JFrame {
 	 * @author Joey Hunt
 	 */
 	public void initialize() {
-		
 		
 		leftPanel.addPropertyChangeListener(viewListener);
 		rightPanel.addPropertyChangeListener(viewListener);
