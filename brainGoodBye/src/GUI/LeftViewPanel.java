@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -10,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import brainGoodBye.Project;
 
 /**
  * 
@@ -80,6 +84,7 @@ public class LeftViewPanel extends JPanel {
 			} else {
 				nameButton.setText(CHANGE_OPTION);
 				nameField.setEditable(false);
+				firePropertyChange("Name", null, nameButton.getText());
 			}
 		});
 		
@@ -95,6 +100,7 @@ public class LeftViewPanel extends JPanel {
 			} else {
 				descriptionButton.setText(CHANGE_OPTION);
 				descriptionArea.setEditable(false);
+				firePropertyChange("Description", null, descriptionArea.getText());
 			}
 		});
 		
@@ -102,7 +108,8 @@ public class LeftViewPanel extends JPanel {
 		JButton materialsButton = new JButton(CHANGE_OPTION);
 		
 		materialsButton.addActionListener(e -> {
-			new MaterialsEditWindow();
+			new MaterialsEditWindow(new Project(new ArrayList<>(), new ArrayList<>(), 
+					"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big"));
 		});
 		
 		JLabel tasksLabel = new JLabel("Task List");
