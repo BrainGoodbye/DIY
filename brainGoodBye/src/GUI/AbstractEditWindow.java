@@ -19,7 +19,8 @@ public abstract class AbstractEditWindow extends JFrame{
 	
 	Project myProject;
 	
-	public AbstractEditWindow(Project theProj) {
+	public AbstractEditWindow(Project theProj, String windowName) {
+		super(windowName);
 		myProject = theProj;
 		
 		//Experimental
