@@ -56,17 +56,18 @@ public class BudgetEditWindow extends AbstractEditWindow {
 		this.add(savingsPerMonthTextField);
 		this.add(previousCostPerMonthLabel);
 		this.add(costPerMonthTextField);
-		this.setVisible(true);
-		doEdits();
+		save();
 	}
 	
 	/**
 	 * Make the changes to the values for the project attributes
 	 */
-	private void doEdits() {
+	@Override
+	public void save() {
 		double cost = Double.parseDouble(costPerMonthTextField.getText());
 		double savings = Double.parseDouble(savingsPerMonthTextField.getText());
 		myProject.setCostPerMonth(cost);
 		myProject.setSavingsPerMonth(savings);
+		this.dispose();
 	}
 }
