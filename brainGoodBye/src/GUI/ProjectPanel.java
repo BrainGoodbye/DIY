@@ -112,23 +112,23 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		if ("New".equals(e.getPropertyName())) {
-<<<<<<< HEAD
 			//TODO open an instance of ProjectView
 			final Project test = new Project(new ArrayList<>(), new ArrayList<>(), 
 					"Test Project", "hello", "", 0.0, 0.0, new Date(), "Large", "Big");
-=======
 			final ProjectView view = new ProjectView();
->>>>>>> c45fbfddaab858f0bcf7ec7662a960bd90b1d1fe
 			
 			view.getViewListener().addPropertyChangeListener("Created Project", this);
 			//addPropertyChangeListener("Created Project", view.getViewListener());
 		} else if ("Created Project".equals(e.getPropertyName())) {
 			final Project project = (Project)e.getNewValue();
+			if(!myProjects.contains(project)) {
+				myProjects.add(project);
+				thumbnailPanel.addThumbnail(new Thumbnail(project, myOptions));
+				firePropertyChange("Added Project", null, myProjects);
+			}
 			
-			myProjects.add(project);
-			thumbnailPanel.addThumbnail(new Thumbnail(project, myOptions));
 			
-			firePropertyChange("Added Project", null, myProjects);
+			
 			System.out.println("hello");
 
 			revalidate();
