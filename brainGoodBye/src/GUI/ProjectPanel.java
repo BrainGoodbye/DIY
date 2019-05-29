@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import brainGoodBye.FileManager;
 import brainGoodBye.Project;
@@ -66,12 +67,14 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 	 * @author Joey Hunt
 	 */
 	private void initialize() {
+		JScrollPane scroller = new JScrollPane(thumbnailPanel);
+		
 		searchPanel.addPropertyChangeListener(myManager);
 		
 		setLayout(new BorderLayout());
 		
 		add(searchPanel, BorderLayout.PAGE_START);
-		add(thumbnailPanel);
+		add(scroller);
 		
 		setBackground(Color.WHITE);
 	}

@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
@@ -34,7 +36,8 @@ public class Thumbnail extends JPanel {
 	 */
 	Thumbnail(final Project project) {
 		myProject = project; 
-		
+		this.setLayout(new BorderLayout());
+		this.setBackground(Color.white);
 		initialize();
 	}
 	
@@ -43,11 +46,20 @@ public class Thumbnail extends JPanel {
 	 * @author Joey Hunt
 	 */
 	private void initialize() {
-		final JLabel name = new JLabel(myProject.getName());
+		final JLabel name = new JLabel("<HTML><U>"+myProject.getName()+"</U></HTML>");
 		
-		add(name);
+		JPanel namePanel = new JPanel();
+		namePanel.add(name, BorderLayout.EAST);
 		
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		
+		JPanel costPan = new JPanel();
+		costPan.setLayout(new BoxLayout(costPan, BoxLayout.Y_AXIS));
+		costPan.add(new JLabel("<HTML><U>Current Cost</U></HTML>"));
+		costPan.add(new JLabel("Expected Cost"));
+		
+		
+		add(namePanel, BorderLayout.NORTH);
+		add(costPan, BorderLayout.WEST);
 		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		//setPreferredSize(new Dimension(200, 100));
 	}
