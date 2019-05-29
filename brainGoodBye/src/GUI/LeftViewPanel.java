@@ -86,11 +86,13 @@ public class LeftViewPanel extends JPanel {
 			if (nameField.isEditable()) {
 				nameButton.setText(CHANGE_OPTION);
 				nameField.setEditable(false);
+				nameField.setBorder(BorderFactory.createEmptyBorder());
 				nameField.setBackground(EMPTY_COLOR);
 				firePropertyChange("Name", null, nameField.getText());
 			} else {
 				nameButton.setText(SAVE_OPTION);
 				nameField.setEditable(true);
+				nameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				nameField.setBackground(Color.WHITE);
 			}
 		});

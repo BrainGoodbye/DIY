@@ -54,7 +54,6 @@ public class ProjectViewListener implements PropertyChangeListener {
 			myProject.setDescription((String)e.getNewValue());
 		} else if ("Save Project".equals(e.getPropertyName())) {
 			pcs.firePropertyChange("Created Project", null, myProject);
-			System.out.println("hi");
 		} 
 	}
 }

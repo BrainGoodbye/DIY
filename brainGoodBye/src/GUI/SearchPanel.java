@@ -7,6 +7,7 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
@@ -56,6 +57,9 @@ public class SearchPanel extends JPanel implements PropertyChangeListener {
 			}
 		});
 		
+		JLabel sortLabel = new JLabel("Sort By: ");
+		
+		add(sortLabel);
 		add(sortByBox);
 		
 		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));

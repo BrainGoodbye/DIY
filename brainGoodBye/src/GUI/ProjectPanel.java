@@ -135,13 +135,13 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 			repaint();
 		} else if ("Delete".equals(e.getPropertyName())) {
 			Thumbnail thumb = (Thumbnail)e.getNewValue();
-			if (!myProjects.isEmpty()) {
+			//if (!myProjects.isEmpty()) {
 				myProjects.remove(thumb.getProject());
 				thumbnailPanel.removeThumbnail(thumb);
 				
 				revalidate();
 				repaint();
-			}
+			//}
 		} else if ("Import All".equals(e.getPropertyName())) {
 			myProjects = (List<Project>)e.getNewValue();
 			
