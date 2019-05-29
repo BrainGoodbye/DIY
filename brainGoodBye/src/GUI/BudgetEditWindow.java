@@ -1,5 +1,6 @@
 package GUI;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
@@ -28,11 +29,25 @@ public class BudgetEditWindow extends AbstractEditWindow {
 	BudgetEditWindow(Project proj, String name) {
 		super(proj, name);
 		previousSavingsPerMonthLabel = new JLabel();
+		previousSavingsPerMonthLabel.setText(String.valueOf(proj.getSavingsPerMonth()));
 		previousCostPerMonthLabel = new JLabel();
+		previousCostPerMonthLabel.setText(String.valueOf(proj.getCostPerMonth()));
 		savingsPerMonthTextArea = new JTextArea();
 		costPerMonthTextArea = new JTextArea();
-		
+		initialize();
 		// 2 text fields
 		// savings per month & cost per month
+	}
+	
+	/**
+	 * @author Thaddaeus
+	 * Set up the window for editing the budget
+	 */
+	private void initialize() {
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(previousSavingsPerMonthLabel);
+		this.add(savingsPerMonthTextArea);
+		this.add(previousCostPerMonthLabel);
+		this.add(costPerMonthTextArea);
 	}
 }
