@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -42,12 +44,15 @@ public class RightViewPanel extends JPanel {
 	
 	private Project myProject;
 	
+	private JFrame myParent;
+	
 	/**
 	 * 
 	 * 
 	 * @author Joey Hunt
 	 */
-	public RightViewPanel(final Project theProject) {
+	public RightViewPanel(final JFrame theParent, final Project theProject) {
+		myParent = theParent;
 		budgetEditPanel = new JPanel();
 		savePanel = new JPanel();
 		innerSavePanel = new JPanel();
@@ -69,6 +74,7 @@ public class RightViewPanel extends JPanel {
 		});
 		
 		JButton saveButton = new JButton("Save");
+		JButton quitButton = new JButton("Quit");
 		
 		saveButton.addActionListener(e -> {
 			//TODO don't make this a property change
@@ -76,10 +82,15 @@ public class RightViewPanel extends JPanel {
 			
 		});
 		
+		quitButton.addActionListener(e -> {
+			myParent.dispatchEvent(new WindowEvent(myParent, WindowEvent.WINDOW_CLOSING));
+		});
+		
 		budgetEditPanel.add(budgetLabel);
 		budgetEditPanel.add(budgetButton);
 		
 		innerSavePanel.add(saveButton);
+		innerSavePanel.add(quitButton);
 		
 		savePanel.setLayout(new BorderLayout());
 		savePanel.add(innerSavePanel, BorderLayout.SOUTH);

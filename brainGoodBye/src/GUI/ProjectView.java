@@ -62,6 +62,9 @@ public class ProjectView extends JFrame {
 	 */
 	private JPanel rightPanel;
 	
+	/**
+	 * A listener for changes to project information.
+	 */
 	private ProjectViewListener viewListener;
 	
 //    /**
@@ -85,11 +88,16 @@ public class ProjectView extends JFrame {
 	 */
 	public ProjectView() {
 		super("Project View");
+		
+		// Test constructor
 		myProject = new Project(new ArrayList<>(), new ArrayList<>(), 
 						"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big");
+		
 		leftPanel = new LeftViewPanel(myProject);
-		rightPanel = new RightViewPanel(myProject);
-		viewListener = new ProjectViewListener();
+		
+		// The right panel needs a reference to its parent frame in order to close it.
+		rightPanel = new RightViewPanel(this, myProject);
+		viewListener = new ProjectViewListener(myProject);
 		
 		initialize();
 	}
@@ -128,9 +136,10 @@ public class ProjectView extends JFrame {
 	}
 	
 	/**
+	 * Returns a view listener.
 	 * 
 	 * @author Joey Hunt
-	 * @return
+	 * @return The listener associated with this class.
 	 */
 	public ProjectViewListener getViewListener() {
 		return viewListener;
