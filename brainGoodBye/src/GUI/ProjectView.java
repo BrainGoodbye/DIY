@@ -15,6 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import brainGoodBye.Project;
+import brainGoodBye.ProjectViewListener;
 
 /**
  * This frame presents detailed project information.
@@ -59,6 +60,8 @@ public class ProjectView extends JFrame {
 	 */
 	private JPanel rightPanel;
 	
+	private ProjectViewListener viewListener;
+	
 //    /**
 //     * Starts the GUI.
 //     * 
@@ -82,6 +85,7 @@ public class ProjectView extends JFrame {
 		super("Project View");
 		leftPanel = new LeftViewPanel();
 		rightPanel = new RightViewPanel();
+		viewListener = new ProjectViewListener();
 		
 		initialize();
 	}
@@ -105,9 +109,8 @@ public class ProjectView extends JFrame {
 	public void initialize() {
 		
 		
-		
-		
-		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
+		leftPanel.addPropertyChangeListener(viewListener);
+		rightPanel.addPropertyChangeListener(viewListener);
 		
 		setLayout(new BorderLayout());
 		
@@ -118,7 +121,6 @@ public class ProjectView extends JFrame {
         setLocation(SCREEN_SIZE.width / 2 - getWidth() / 2, 
                                  SCREEN_SIZE.height / 2 - getHeight() / 2);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        pack();
         setVisible(true);
 	}
 	

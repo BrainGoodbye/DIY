@@ -1,7 +1,6 @@
 package GUI;
 
-import AbstractEditWindow;
 
 public class MaterialsEditWindow extends AbstractEditWindow {
-
+	super(proj, name);
 }
