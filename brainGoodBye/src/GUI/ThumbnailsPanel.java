@@ -25,15 +25,9 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	private static final long serialVersionUID = 5108160806805172073L;
 	
 	/**
-	 * A pane which holds the thumbnails.
-	 */
-	private JScrollPane scrollPane;
-	
-	/**
 	 * A list of thumbnails.
 	 */
 	private List<Thumbnail> myThumbnails;
-	
 	
 	/**
 	 * Creates the thumbnail panel.
@@ -41,22 +35,9 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	 * @author Joey Hunt
 	 */
 	ThumbnailsPanel() {
-		scrollPane = new JScrollPane();
 		myThumbnails = new ArrayList<>();
 		initialize();
 	}
-	
-//	/**
-//	 * Creates the thumbnail panel.
-//	 * 
-//	 * @author Joey Hunt
-//	 */
-//	ThumbnailsPanel(final List<Project> theProjects) {
-//		scrollPane = new JScrollPane();
-//		myProjects = new ArrayList<>();
-//		
-//		initialize();
-//	}
 	
 	/**
 	 * Initializes the thumbnail panel.
@@ -84,8 +65,8 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	
 	/**
 	 * 
-	 * 
-	 * @author Joey Hunt
+	 * @author Hunter Lantz
+	 * @author Joey Hunt (Minor edits)
 	 * @param thumbnail
 	 */
 	public void addThumbnail(final Thumbnail thumbnail) {
