@@ -109,6 +109,8 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 			final Project test = new Project(new ArrayList<>(), new ArrayList<>(), 
 					"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big");
 			
+			ProjectView testView = new ProjectView();
+			
 			myProjects.add(test);
 			thumbnailPanel.addThumbnail(new Thumbnail(test));
 			
