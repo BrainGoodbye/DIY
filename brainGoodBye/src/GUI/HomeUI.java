@@ -50,7 +50,7 @@ public class HomeUI extends JFrame {
 		menuBar = new TheMenuBar();
 		fileManager = new FileManager();
 		optionsPanel = new OptionsPanel();
-		projectPanel = new ProjectPanel(fileManager);
+		projectPanel = new ProjectPanel(fileManager, optionsPanel);
 	}
 	
 	/**
