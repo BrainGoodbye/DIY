@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * This class listens for changes to a project and sends the full project
  * 
  * @author Joey Hunt
  */
@@ -17,16 +18,17 @@ public class ProjectViewListener implements PropertyChangeListener {
 	private PropertyChangeSupport pcs;
 	
 	/**
+	 * Creates a project view listener.
 	 * 
 	 * @author Joey Hunt
 	 */
-	public ProjectViewListener() {
-		myProject = new Project(new ArrayList<>(), new ArrayList<>(), 
-				"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big");
+	public ProjectViewListener(final Project theProject) {
+		myProject = theProject;
 		pcs = new PropertyChangeSupport(this);
 	}
 	
 	/**
+	 * Adds a listener to an instance of this class.
 	 * 
 	 * @author Joey Hunt
 	 * @param thePropertyName
@@ -37,6 +39,13 @@ public class ProjectViewListener implements PropertyChangeListener {
         pcs.addPropertyChangeListener(thePropertyName, theListener);
     }
 	
+    /**
+     * {@inheritDoc}
+     * 
+     * 
+     * 
+     * @author Joey Hunt
+     */
 	@Override
 	public void propertyChange(final PropertyChangeEvent e) {
 		if ("Name".equals(e.getPropertyName())) {
@@ -44,7 +53,8 @@ public class ProjectViewListener implements PropertyChangeListener {
 		} else if ("Description".equals(e.getPropertyName())) {
 			myProject.setDescription((String)e.getNewValue());
 		} else if ("Save Project".equals(e.getPropertyName())) {
-			pcs.firePropertyChange("Added Project", null, myProject);
+			pcs.firePropertyChange("Created Project", null, myProject);
+			System.out.println("hi");
 		} 
 	}
 }

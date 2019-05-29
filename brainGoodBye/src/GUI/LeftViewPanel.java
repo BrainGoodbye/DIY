@@ -31,6 +31,8 @@ public class LeftViewPanel extends JPanel {
 	
 	private static final String SAVE_OPTION = "Save";
 	
+	private static final Color EMPTY_COLOR = new Color(0, 0, 0, 0);
+	
 	/**
 	 * Panel which displays the name of the project.
 	 */
@@ -76,18 +78,20 @@ public class LeftViewPanel extends JPanel {
 	private void initialize() {
 		JTextField nameField = new JTextField("Name");
 		nameField.setBorder(BorderFactory.createEmptyBorder());
-		nameField.setBackground(new Color(0, 0, 0, 0));
+		nameField.setBackground(EMPTY_COLOR);
 		nameField.setEditable(false);
 		JButton nameButton = new JButton(CHANGE_OPTION);
 		
 		nameButton.addActionListener(e -> {
-			if (!nameField.isEditable()) {
-				nameButton.setText(SAVE_OPTION);
-				nameField.setEditable(true);
-			} else {
+			if (nameField.isEditable()) {
 				nameButton.setText(CHANGE_OPTION);
 				nameField.setEditable(false);
-				firePropertyChange("Name", null, nameButton.getText());
+				nameField.setBackground(EMPTY_COLOR);
+				firePropertyChange("Name", null, nameField.getText());
+			} else {
+				nameButton.setText(SAVE_OPTION);
+				nameField.setEditable(true);
+				nameField.setBackground(Color.WHITE);
 			}
 		});
 		
@@ -95,15 +99,20 @@ public class LeftViewPanel extends JPanel {
 		JButton descriptionButton = new JButton(CHANGE_OPTION);
 		JTextArea descriptionArea = new JTextArea();
 		descriptionArea.setEditable(false);
+		descriptionArea.setLineWrap(true);
+		descriptionArea.setWrapStyleWord(true);
+		descriptionArea.setBackground(Color.LIGHT_GRAY);
 		
 		descriptionButton.addActionListener(e -> {
-			if (!descriptionArea.isEditable()) {
-				descriptionButton.setText(SAVE_OPTION);
-				descriptionArea.setEditable(true);
-			} else {
+			if (descriptionArea.isEditable()) {
 				descriptionButton.setText(CHANGE_OPTION);
 				descriptionArea.setEditable(false);
+				descriptionArea.setBackground(Color.LIGHT_GRAY);
 				firePropertyChange("Description", null, descriptionArea.getText());
+			} else {
+				descriptionButton.setText(SAVE_OPTION);
+				descriptionArea.setEditable(true);
+				descriptionArea.setBackground(Color.WHITE);
 			}
 		});
 		
