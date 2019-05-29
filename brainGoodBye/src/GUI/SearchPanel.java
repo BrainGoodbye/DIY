@@ -4,15 +4,11 @@ import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
-
-import brainGoodBye.FileManager;
-import brainGoodBye.Project;
 
 /**
  * This panel allows players to sort and search for thumbnails.

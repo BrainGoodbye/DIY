@@ -50,7 +50,7 @@ public class HomeUI extends JFrame {
 		menuBar = new TheMenuBar();
 		fileManager = new FileManager();
 		optionsPanel = new OptionsPanel();
-		projectPanel = new ProjectPanel(fileManager);
+		projectPanel = new ProjectPanel(fileManager, optionsPanel);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class HomeUI extends JFrame {
 	 */
 	public void start() {
 		//Basic setup
-		this.setSize(400, 400);
+		this.setSize(600, 400);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
