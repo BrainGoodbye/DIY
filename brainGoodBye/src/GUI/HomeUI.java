@@ -44,6 +44,7 @@ public class HomeUI extends JFrame {
 	 * 
 	 * @author Jacob Ficker
 	 * @author Joey Hunt
+	 * @author Hunter Lantz
 	 */
 	public HomeUI() {
 		super("Team BrainGoodbye DIY");
@@ -58,6 +59,7 @@ public class HomeUI extends JFrame {
 	 * 
 	 * @author Jacob Ficker
 	 * @author Joey Hunt
+	 * @author Hunter Lantz
 	 */
 	public void start() {
 		//Basic setup

@@ -53,7 +53,7 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 
 	/**
 	 * Creates a project panel.
-	 * 
+	 * @author Hunter
 	 * @author Joey Hunt
 	 */
 	ProjectPanel(final FileManager manager, OptionsPanel options) {
@@ -75,6 +75,7 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 		
 		searchPanel.addPropertyChangeListener(myManager);
 		myManager.addPropertyChangeListener((PropertyChangeListener) searchPanel);
+		searchPanel.addPropertyChangeListener(thumbnailPanel);
 		
 		setLayout(new BorderLayout());
 		
@@ -104,10 +105,20 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 //		myProjects = theProjects;
 //	}
 
+	
+	/**
+	 * @author Hunter
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		if ("New".equals(e.getPropertyName())) {
+<<<<<<< HEAD
+			//TODO open an instance of ProjectView
+			final Project test = new Project(new ArrayList<>(), new ArrayList<>(), 
+					"Test Project", "hello", "", 0.0, 0.0, new Date(), "Large", "Big");
+=======
 			final ProjectView view = new ProjectView();
+>>>>>>> c45fbfddaab858f0bcf7ec7662a960bd90b1d1fe
 			
 			view.getViewListener().addPropertyChangeListener("Created Project", this);
 			//addPropertyChangeListener("Created Project", view.getViewListener());

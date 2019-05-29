@@ -21,6 +21,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import GUI.Thumbnail;
+
 /**
  * 
  * @author Thaddaeus
@@ -202,6 +204,8 @@ public final class FileManager implements PropertyChangeListener {
 			importAll();
 		} else if ("Added Project".equals(theEvent.getPropertyName())) {
 			myProjects = (List<Project>)theEvent.getNewValue();
+		} else if("Delete".equals(theEvent.getPropertyName())) {
+			myProjects.remove(((Thumbnail)theEvent.getNewValue()).getProject());
 		}
 	}
 

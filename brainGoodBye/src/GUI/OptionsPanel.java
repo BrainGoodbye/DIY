@@ -11,6 +11,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+
+/**
+ * 
+ * @author Hunter Lantz
+ *
+ */
 public class OptionsPanel extends JPanel{
 
 	/**
@@ -71,6 +77,10 @@ public class OptionsPanel extends JPanel{
 		this.setBackground(Color.LIGHT_GRAY);
 	}
 	
+	/**
+	 * @author Hunter Lantz
+	 * @param selected what to select
+	 */
 	public void setSelected(Thumbnail selected) {
 		mySelected = selected;
 		deleteButton.setEnabled(true);
