@@ -8,21 +8,21 @@ public class Material implements Cloneable{
 	private boolean isAcquired;
 	private String myName;
 	
-	Material(String nam, int quant, Double price) {
+	public Material(String nam, int quant, Double price) {
 		isAcquired = false;
 		myPrice = price;
 		myQuantity = quant;
 		myName = nam;
 	}
 	
-	Material(String name, int quantity, Double price, boolean acq) {
+	public Material(String name, int quantity, Double price, boolean acq) {
 		isAcquired = acq;
 		myPrice = price;
 		myQuantity = quantity;
 		myName = name;
 	}
 	
-	Material() {
+	public Material() {
 		myQuantity = 0;
 		myPrice = 0.0;
 		isAcquired = false;

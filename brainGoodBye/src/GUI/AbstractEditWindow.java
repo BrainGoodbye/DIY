@@ -10,7 +10,7 @@ import brainGoodBye.Project;
  * @author Jacob Ficker
  *
  */
-public abstract class AbstractEditWindow extends JFrame{
+public abstract class AbstractEditWindow extends JFrame implements EditWindow{
 
 	/**
 	 * Generated SUID
@@ -24,14 +24,11 @@ public abstract class AbstractEditWindow extends JFrame{
 		myProject = theProj;
 		
 		//Experimental
+		this.setVisible(true);
 		this.setUndecorated(true);
 		this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(400, 400);
-	}
-	
-	public Project getChanges() {
-		return myProject.clone();
 	}
 	
 	
