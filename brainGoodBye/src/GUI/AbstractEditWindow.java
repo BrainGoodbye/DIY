@@ -27,6 +27,7 @@ public abstract class AbstractEditWindow extends JFrame{
 		this.setUndecorated(true);
 		this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setSize(400, 400);
 	}
 	
 	public Project getChanges() {
