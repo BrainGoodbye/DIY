@@ -6,6 +6,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -106,7 +107,7 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 		if ("New".equals(e.getPropertyName())) {
 			//TODO open an instance of ProjectView
 			final Project test = new Project(new ArrayList<>(), new ArrayList<>(), 
-					"Test Project", "hello", "", 10.0, 20.0);
+					"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big");
 			
 			myProjects.add(test);
 			thumbnailPanel.addThumbnail(new Thumbnail(test));
