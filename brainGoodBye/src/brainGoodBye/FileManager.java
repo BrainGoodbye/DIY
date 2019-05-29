@@ -18,6 +18,7 @@ import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -158,6 +159,11 @@ public final class FileManager implements PropertyChangeListener {
         pcs.addPropertyChangeListener(thePropertyName, theListener);
         
     }
+    
+	public void addPropertyChangeListener(final PropertyChangeListener theListener) {
+        pcs.addPropertyChangeListener(theListener);
+        
+	}
 
     public void removePropertyChangeListener(final PropertyChangeListener theListener) {
         pcs.removePropertyChangeListener(theListener);

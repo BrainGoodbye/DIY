@@ -19,6 +19,7 @@ import brainGoodBye.Project;
  * of this information.
  * 
  * @author Joey Hunt
+ * @author minor edits: Thaddaeus
  */
 public class ProjectPanel extends JPanel implements PropertyChangeListener {
 
@@ -70,6 +71,7 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 		JScrollPane scroller = new JScrollPane(thumbnailPanel);
 		
 		searchPanel.addPropertyChangeListener(myManager);
+		myManager.addPropertyChangeListener((PropertyChangeListener) searchPanel);
 		
 		setLayout(new BorderLayout());
 		

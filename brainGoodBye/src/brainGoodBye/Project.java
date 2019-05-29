@@ -2,6 +2,7 @@ package brainGoodBye;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,10 +20,15 @@ public class Project implements Serializable {
 	private String name;
 	private String description;
 	private String imageFile;
+	private String size;
+	private String skill;
+	private Date lastModified;
 	private Double savingsPerMonth;
 	private Double costPerMonth;
 	
-	public Project(List<Material> mat, List<Task> tas, String nam, String desc, String img, Double saving, Double costs) {
+	public Project(List<Material> mat, List<Task> tas, String nam, String desc, String img, 
+			Double saving, Double costs, Date theDate, String theSize, String theSkill) {
+		
 		materials = mat;
 		tasks = tas;
 		name = nam;
@@ -30,6 +36,9 @@ public class Project implements Serializable {
 		imageFile = img;
 		savingsPerMonth = saving;
 		costPerMonth = costs;
+		skill = theSkill;
+		size = theSize;
+		lastModified = theDate;
 	}
 	
 	
@@ -129,6 +138,46 @@ public class Project implements Serializable {
 		return costPerMonth;
 	}
 	
+	public Double getTotalHours() {
+		Double done = 0.0;
+		for (int i = 0; i < tasks.size(); i++) {
+			done += tasks.get(i).getHoursToComplete();
+		}
+		return done;
+	}
 	
+	public Double getHoursDone() {
+		Double done = 0.0;
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).isDone()) {
+				done += tasks.get(i).getHoursToComplete();
+			}
+		}
+		return done;
+	}
+	
+	public Double totalCost() {
+		Double done = 0.0;
+		for (int i = 0; i < materials.size(); i++) {
+			done += materials.get(i).getPrice() * materials.get(i).getQuantity();
+		}
+		return done;
+	}
+	
+	public Double getSpent() {
+		Double done = 0.0;
+		for (int i = 0; i < materials.size(); i++) {
+			if (materials.get(i).isAcquired()) {
+				done += materials.get(i).getPrice() * materials.get(i).getQuantity();
+			}
+		}
+		return done;
+	}
+	
+	public Project clone() {
+		return new Project(this.getMaterialListCopy(), this.getTaskListCopy(), 
+				name, description, imageFile, savingsPerMonth, costPerMonth,
+				(Date) lastModified.clone(), size, skill);
+	}
 	
 }
