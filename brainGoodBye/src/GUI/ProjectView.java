@@ -64,8 +64,6 @@ public class ProjectView extends JFrame {
 	
 	private ProjectViewListener viewListener;
 	
-	private Project myProject;
-	
 //    /**
 //     * Starts the GUI.
 //     * 
