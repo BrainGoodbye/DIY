@@ -34,7 +34,7 @@ public class BudgetEditWindow extends AbstractEditWindow {
 	 * @author Thaddaeus
 	 */
 	BudgetEditWindow(Project proj) {
-		super(proj);
+		super(proj, "Edit Budget");
 		myProject = proj;
 		previousSavingsPerMonthLabel = new JLabel();
 		previousSavingsPerMonthLabel.setText(String.valueOf("Previous savings-per-month: " + proj.getSavingsPerMonth()));
@@ -56,7 +56,7 @@ public class BudgetEditWindow extends AbstractEditWindow {
 		this.add(savingsPerMonthTextField);
 		this.add(previousCostPerMonthLabel);
 		this.add(costPerMonthTextField);
-		
+		this.setVisible(true);
 		doEdits();
 	}
 	
