@@ -117,6 +117,8 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		createThumbnails();
+		this.revalidate();
+		this.repaint();
 	}
 
 	/**
