@@ -126,10 +126,6 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 				thumbnailPanel.addThumbnail(new Thumbnail(project, myOptions));
 				firePropertyChange("Added Project", null, myProjects);
 			}
-			
-			
-			
-			System.out.println("hello");
 
 			revalidate();
 			repaint();
