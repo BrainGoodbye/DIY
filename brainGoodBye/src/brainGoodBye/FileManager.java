@@ -27,6 +27,7 @@ import GUI.Thumbnail;
  * 
  * @author Thaddaeus
  * @author Joey Hunt
+ * @author Hunter Lantz
  */
 public final class FileManager implements PropertyChangeListener {
 	
@@ -114,9 +115,9 @@ public final class FileManager implements PropertyChangeListener {
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
 			File saved = chooser.getSelectedFile();
 			try {
-	            FileOutputStream file = new FileOutputStream(saved); 
-	            ObjectOutputStream byteStream = new ObjectOutputStream(file); 
-	            byteStream.writeObject(myProjects); 
+	            FileOutputStream file = new FileOutputStream(saved); // a file stream for writing the serialized objects two.
+	            ObjectOutputStream byteStream = new ObjectOutputStream(file); // connect the byte stream to the file stream
+	            byteStream.writeObject(myProjects); // write objects to a byte stream for putting in a file
 	            byteStream.close(); 
 	            file.close();
 			} catch (IOException e) {
@@ -137,8 +138,8 @@ public final class FileManager implements PropertyChangeListener {
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
 			File saved = chooser.getSelectedFile();
 			try {
-				FileInputStream file = new FileInputStream(saved); 
-				ObjectInputStream in = new ObjectInputStream(file); 
+				FileInputStream file = new FileInputStream(saved); // stream to read file from
+				ObjectInputStream in = new ObjectInputStream(file); // stream to read objects from, converted from file stream
 
 				@SuppressWarnings("unchecked") // not known for sure the type of the deserialized object
 				List<Project> projects = (List<Project>) in.readObject();
@@ -180,8 +181,6 @@ public final class FileManager implements PropertyChangeListener {
 
 	/**
 	 * {@inheritDoc}
-	 * 
-	 * 
 	 * 
 	 * @author Joey Hunt
 	 * @param theEvent The property which has changed.
