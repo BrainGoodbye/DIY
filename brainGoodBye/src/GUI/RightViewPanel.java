@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -30,8 +32,14 @@ public class RightViewPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 5516273502639193358L;
 	
+	/**
+	 * A panel for choosing an image.
+	 */
 	private JPanel imageEditPanel;
 	
+	/**
+	 * A panel for viewing the image.
+	 */
 	private JPanel imagePanel;
 
 	/**
@@ -97,6 +105,7 @@ public class RightViewPanel extends JPanel {
 	private void initialize() {
 		JLabel imageLabel = new JLabel("Image");
 		JButton imageButton = new JButton("Edit");
+		JLabel imageViewLabel = new JLabel();
 		
 		imageButton.addActionListener(e -> {
 			final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
@@ -104,7 +113,7 @@ public class RightViewPanel extends JPanel {
 					"jpg", "jpeg", "png", "gif"));
 			int returnVal = chooser.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				//Use the image
+				final File selected = chooser.getSelectedFile();
 			}
 		});
 		

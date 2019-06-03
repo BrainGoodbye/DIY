@@ -13,8 +13,14 @@ import java.util.Date;
  */
 public class ProjectViewListener implements PropertyChangeListener {
 
+	/**
+	 * The project currently listened to.
+	 */
 	private Project myProject;
 	
+	/**
+	 * Property change support for this class.
+	 */
 	private PropertyChangeSupport pcs;
 	
 	/**
@@ -42,7 +48,7 @@ public class ProjectViewListener implements PropertyChangeListener {
     /**
      * {@inheritDoc}
      * 
-     * 
+     * Sets the attributes of 
      * 
      * @author Joey Hunt
      */
