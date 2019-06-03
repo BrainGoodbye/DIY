@@ -77,7 +77,7 @@ public class ProjectView extends JFrame {
 		
 		// Test constructor
 		myProject = new Project(new ArrayList<>(), new ArrayList<>(), 
-						"Test Project", "hello", "", 10.0, 20.0, new Date(), "Large", "Big");
+						"Test Project", "", "", 0.0, 0.0, new Date(), "Small", "Beginner");
 		
 		leftPanel = new LeftViewPanel(myProject);
 		
