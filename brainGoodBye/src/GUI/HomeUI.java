@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
@@ -18,6 +20,22 @@ public class HomeUI extends JFrame {
 	 * Automatically-generated serial ID.
 	 */
 	private static final long serialVersionUID = -2836282326556330720L;
+	
+	/**
+     * The default toolkit.
+     */
+    private static final Toolkit KIT = Toolkit.getDefaultToolkit();
+    
+    /**
+     * The size of the screen.
+     */
+    private static final Dimension SCREEN_SIZE = KIT.getScreenSize();
+    
+    /**
+     * The initial size of the frame.
+     */
+    private static final Dimension FRAME_SIZE = new Dimension(SCREEN_SIZE.width / 2, 
+                                                              SCREEN_SIZE.height / 2);
 	
 	/**
 	 * A menu bar for the program.
@@ -63,8 +81,10 @@ public class HomeUI extends JFrame {
 	 */
 	public void start() {
 		//Basic setup
-		this.setSize(600, 400);
-        this.setLocationRelativeTo(null);
+
+        setSize(FRAME_SIZE);
+        setLocation(SCREEN_SIZE.width / 2 - getWidth() / 2, 
+                                 SCREEN_SIZE.height / 2 - getHeight() / 2);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
 		
