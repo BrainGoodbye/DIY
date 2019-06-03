@@ -66,20 +66,6 @@ public class ProjectView extends JFrame {
 	 * A listener for changes to project information.
 	 */
 	private ProjectViewListener viewListener;
-	
-//    /**
-//     * Starts the GUI.
-//     * 
-//     * @param theArgs Command line arguments. Not used for this program.
-//     */
-//    public static void main(final String... theArgs) {
-//        EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                initialize();
-//            }
-//        });
-//    }
 
 	/**
 	 * Instantiates the project view with no project.
@@ -118,8 +104,7 @@ public class ProjectView extends JFrame {
 	 * 
 	 * @author Joey Hunt
 	 */
-	public void initialize() {
-		
+	private void initialize() {
 		leftPanel.addPropertyChangeListener(viewListener);
 		rightPanel.addPropertyChangeListener(viewListener);
 		
