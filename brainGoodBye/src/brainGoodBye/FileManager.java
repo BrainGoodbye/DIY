@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,8 +19,8 @@ import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 import GUI.Thumbnail;
 
@@ -53,6 +54,58 @@ public final class FileManager implements PropertyChangeListener {
 		mySettings = "Cost";
 		currentPath = ".";
 		myProjects = new ArrayList<>();
+		loadPersistance();
+	}
+	
+	/**
+	 * @author Hunter
+	 */
+	public void updatePersistance() {
+		File location = new File("data.txt");
+		for(File file: location.listFiles()) 
+		    if (!file.isDirectory()) 
+		        file.delete();
+		
+		FileOutputStream file;
+		try {
+			file = new FileOutputStream(location);
+			ObjectOutputStream byteStream = new ObjectOutputStream(file); // connect the byte stream to the file stream
+		    byteStream.writeObject(myProjects); // write objects to a byte stream for putting in a file
+		    byteStream.close(); 
+		    file.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       
+	}
+	
+	/**
+	 * @author Hunter
+	 */
+	public void loadPersistance() {
+		FileInputStream file;
+		File location = new File("data.txt");
+		if(location.length()==0)return;
+		try {
+			file = new FileInputStream(location);
+			ObjectInputStream in = new ObjectInputStream(file); // stream to read objects from, converted from file stream
+
+			@SuppressWarnings("unchecked") // not known for sure the type of the deserialized object
+			List<Project> projects = (List<Project>) in.readObject();
+
+			pcs.firePropertyChange("Import All", null, projects);
+
+			in.close(); 
+			file.close(); 
+		} catch (IOException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
@@ -183,6 +236,7 @@ public final class FileManager implements PropertyChangeListener {
 	 * {@inheritDoc}
 	 * 
 	 * @author Joey Hunt
+	 * @author Hunter
 	 * @param theEvent The property which has changed.
 	 */
 	@Override
