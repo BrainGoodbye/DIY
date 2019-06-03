@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import brainGoodBye.FileManager;
 
@@ -88,6 +91,7 @@ public class HomeUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
 		
+        
         menuBar.initialize();
         
         optionsPanel.addPropertyChangeListener(fileManager);
@@ -103,6 +107,7 @@ public class HomeUI extends JFrame {
 		this.add(projectPanel, BorderLayout.CENTER);
 		
 		this.getContentPane().setBackground(Color.WHITE);
+		fileManager.loadPersistance();
 		//You Can SEE ME NOW
 		this.setVisible(true);
 	}
