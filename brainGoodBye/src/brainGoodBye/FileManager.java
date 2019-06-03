@@ -60,11 +60,8 @@ public final class FileManager implements PropertyChangeListener {
 	/**
 	 * @author Hunter
 	 */
-	public void updatePersistance() {
+	private void updatePersistance() {
 		File location = new File("data.txt");
-		for(File file: location.listFiles()) 
-		    if (!file.isDirectory()) 
-		        file.delete();
 		
 		FileOutputStream file;
 		try {
@@ -89,6 +86,7 @@ public final class FileManager implements PropertyChangeListener {
 	public void loadPersistance() {
 		FileInputStream file;
 		File location = new File("data.txt");
+		System.out.println(location.length());
 		if(location.length()==0)return;
 		try {
 			file = new FileInputStream(location);
@@ -257,8 +255,10 @@ public final class FileManager implements PropertyChangeListener {
 			importAll();
 		} else if ("Added Project".equals(theEvent.getPropertyName())) {
 			myProjects = (List<Project>)theEvent.getNewValue();
+			updatePersistance();
 		} else if("Delete".equals(theEvent.getPropertyName())) {
 			myProjects.remove(((Thumbnail)theEvent.getNewValue()).getProject());
+			updatePersistance();
 		}
 	}
 
