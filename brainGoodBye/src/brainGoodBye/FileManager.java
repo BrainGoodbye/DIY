@@ -86,11 +86,13 @@ public final class FileManager implements PropertyChangeListener {
 	 * @author Hunter
 	 */
 	private void updatePersistantSettings() {
-		try (FileReader fr = new FileReader("settings.txt");
-                BufferedReader br = new BufferedReader(fr)) {
-			pcs.firePropertyChange("Import Settings", null, br.readLine());
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(new File("settings.txt")));
+			writer.write(mySettings);
+			writer.close();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Error: file could not be read.");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
