@@ -58,6 +58,10 @@ public class ProjectViewListener implements PropertyChangeListener {
 			myProject.setName((String)e.getNewValue());
 		} else if ("Description".equals(e.getPropertyName())) {
 			myProject.setDescription((String)e.getNewValue());
+		} else if ("Size".equals(e.getPropertyName())) {
+			myProject.setSize((String)e.getNewValue());
+		} else if ("Difficulty".equals(e.getPropertyName())) {
+			myProject.setDifficulty((String)e.getNewValue());
 		} else if ("Save Project".equals(e.getPropertyName())) {
 			pcs.firePropertyChange("Created Project", null, myProject);
 		} 

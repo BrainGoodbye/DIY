@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -11,6 +12,7 @@ import java.util.Date;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +35,16 @@ public class RightViewPanel extends JPanel {
 	private static final long serialVersionUID = 5516273502639193358L;
 	
 	/**
+	 * A list of selectable project sizes.
+	 */
+	private static final String[] sizes = {"Small", "Medium", "Large"};
+	
+	/**
+	 * A list of selectable project difficulties.
+	 */
+	private static final String[] difficulties = {"Beginner", "Moderate", "Expert"};
+	
+	/**
 	 * A panel for choosing an image.
 	 */
 	private JPanel imageEditPanel;
@@ -51,6 +63,10 @@ public class RightViewPanel extends JPanel {
 	 * A panel for viewing the budget.
 	 */
 	private JPanel budgetPanel;
+	
+	private JPanel sizePanel;
+	
+	private JPanel difficultyPanel;
 	
 	/**
 	 * A panel for saving or quitting the view.
@@ -90,6 +106,8 @@ public class RightViewPanel extends JPanel {
 		imagePanel = new JPanel();
 		budgetEditPanel = new JPanel();
 		budgetPanel = new JPanel();
+		sizePanel = new JPanel();
+		difficultyPanel = new JPanel();
 		savePanel = new JPanel();
 		innerSavePanel = new JPanel();
 		myProject = theProject;
@@ -124,6 +142,25 @@ public class RightViewPanel extends JPanel {
 			new BudgetEditWindow(myProject);
 		});
 		
+		JLabel sizeLabel = new JLabel("Size: ");
+		JComboBox<String> sizeBox = new JComboBox<>(sizes);
+		JLabel difficultyLabel = new JLabel("Difficulty: ");
+		JComboBox<String> difficultyBox = new JComboBox<>(difficulties);
+		
+		sizeBox.addItemListener(e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED) {
+				// Old item value is not used.
+				firePropertyChange("Size", null, e.getItem());
+			}
+		});
+		
+		difficultyBox.addItemListener(e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED) {
+				// Old item value is not used.
+				firePropertyChange("Difficulty", null, e.getItem());
+			}
+		});
+		
 		JButton saveQuitButton = new JButton("Save & Quit");
 		JButton quitButton = new JButton("Quit");
 		
@@ -141,7 +178,11 @@ public class RightViewPanel extends JPanel {
 		imageEditPanel.add(imageLabel);
 		imageEditPanel.add(imageButton);
 		
+		sizePanel.add(sizeLabel);
+		sizePanel.add(sizeBox);
 		
+		difficultyPanel.add(difficultyLabel);
+		difficultyPanel.add(difficultyBox);
 		
 		budgetEditPanel.add(budgetLabel);
 		budgetEditPanel.add(budgetButton);
@@ -157,6 +198,8 @@ public class RightViewPanel extends JPanel {
 		add(imagePanel);
 		add(budgetEditPanel);
 		add(budgetPanel);
+		add(sizePanel);
+		add(difficultyPanel);
 		add(savePanel);
 	}
 }
