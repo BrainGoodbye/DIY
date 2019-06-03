@@ -77,7 +77,21 @@ public final class FileManager implements PropertyChangeListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		updatePersistantSettings();
        
+	}
+	
+	/**
+	 * @author Hunter
+	 */
+	private void updatePersistantSettings() {
+		try (FileReader fr = new FileReader("settings.txt");
+                BufferedReader br = new BufferedReader(fr)) {
+			pcs.firePropertyChange("Import Settings", null, br.readLine());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error: file could not be read.");
+		}
 	}
 	
 	/**
@@ -103,7 +117,20 @@ public final class FileManager implements PropertyChangeListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		loadPersistantSettings();
+	}
+	
+	
+	/**
+	 * @author Hunter Lantz
+	 */
+	public void loadPersistantSettings() {
+		try (FileReader fr = new FileReader("settings.txt");
+                BufferedReader br = new BufferedReader(fr)) {
+			pcs.firePropertyChange("Import Settings", null, br.readLine());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error: file could not be read.");
+		}
 	}
 	
 	/**
@@ -241,6 +268,7 @@ public final class FileManager implements PropertyChangeListener {
 	public void propertyChange(final PropertyChangeEvent theEvent) {
 		if ("Sort".equals(theEvent.getPropertyName())) {
 			mySettings = (String)theEvent.getNewValue();
+			updatePersistantSettings();
 		} else if ("ESettings".equals(theEvent.getPropertyName())) {
 			exportSettings();
 		} else if ("ISettings".equals(theEvent.getPropertyName())) {
