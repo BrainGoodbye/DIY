@@ -105,7 +105,7 @@ public class LeftViewPanel extends JPanel {
 	 * @author Joey Hunt
 	 */
 	private void initialize() {
-		JTextField nameField = new JTextField("Name");
+		JTextField nameField = new JTextField(myProject.getName());
 		nameField.setBorder(BorderFactory.createEmptyBorder());
 		nameField.setBackground(EMPTY_COLOR);
 		nameField.setEditable(false);
@@ -129,6 +129,7 @@ public class LeftViewPanel extends JPanel {
 		JLabel descriptionLabel = new JLabel("Description");
 		JButton descriptionButton = new JButton(CHANGE_OPTION);
 		JTextArea descriptionArea = new JTextArea();
+		descriptionArea.append(myProject.getDescription());
 		descriptionArea.setEditable(false);
 		descriptionArea.setLineWrap(true);
 		descriptionArea.setWrapStyleWord(true);

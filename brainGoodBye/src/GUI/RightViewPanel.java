@@ -6,6 +6,8 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -44,15 +46,15 @@ public class RightViewPanel extends JPanel {
 	 */
 	private static final String[] difficulties = {"Beginner", "Moderate", "Expert"};
 	
-	/**
-	 * A panel for choosing an image.
-	 */
-	private JPanel imageEditPanel;
-	
-	/**
-	 * A panel for viewing the image.
-	 */
-	private JPanel imagePanel;
+//	/**
+//	 * A panel for choosing an image.
+//	 */
+//	private JPanel imageEditPanel;
+//	
+//	/**
+//	 * A panel for viewing the image.
+//	 */
+//	private JPanel imagePanel;
 
 	/**
 	 * A panel for editing the budget.
@@ -64,8 +66,14 @@ public class RightViewPanel extends JPanel {
 	 */
 	private JPanel budgetPanel;
 	
+	/**
+	 * A panel for changing the size.
+	 */
 	private JPanel sizePanel;
 	
+	/**
+	 * A panel for changing the difficulty.
+	 */
 	private JPanel difficultyPanel;
 	
 	/**
@@ -102,12 +110,13 @@ public class RightViewPanel extends JPanel {
 	 */
 	public RightViewPanel(final JFrame theParent, final Project theProject) {
 		myParent = theParent;
-		imageEditPanel = new JPanel();
-		imagePanel = new JPanel();
+//		imageEditPanel = new JPanel();
+//		imagePanel = new JPanel();
 		budgetEditPanel = new JPanel();
 		budgetPanel = new JPanel();
 		sizePanel = new JPanel();
 		difficultyPanel = new JPanel();
+		updatedPanel = new JPanel();
 		savePanel = new JPanel();
 		innerSavePanel = new JPanel();
 		myProject = theProject;
@@ -121,19 +130,20 @@ public class RightViewPanel extends JPanel {
 	 * @author Joey Hunt
 	 */
 	private void initialize() {
-		JLabel imageLabel = new JLabel("Image");
-		JButton imageButton = new JButton("Edit");
-		JLabel imageViewLabel = new JLabel();
-		
-		imageButton.addActionListener(e -> {
-			final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
-			chooser.setFileFilter(new FileNameExtensionFilter("Image Files", 
-					"jpg", "jpeg", "png", "gif"));
-			int returnVal = chooser.showOpenDialog(null);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				final File selected = chooser.getSelectedFile();
-			}
-		});
+		// Image functionality postponed.
+//		JLabel imageLabel = new JLabel("Image");
+//		JButton imageButton = new JButton("Edit");
+//		JLabel imageViewLabel = new JLabel();
+//		
+//		imageButton.addActionListener(e -> {
+//			final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
+//			chooser.setFileFilter(new FileNameExtensionFilter("Image Files", 
+//					"jpg", "jpeg", "png", "gif"));
+//			int returnVal = chooser.showOpenDialog(null);
+//			if (returnVal == JFileChooser.APPROVE_OPTION) {
+//				final File selected = chooser.getSelectedFile();
+//			}
+//		});
 		
 		JLabel budgetLabel = new JLabel("Budget");
 		JButton budgetButton = new JButton("Edit");
@@ -142,10 +152,12 @@ public class RightViewPanel extends JPanel {
 			new BudgetEditWindow(myProject);
 		});
 		
-		JLabel sizeLabel = new JLabel("Size: ");
+		JLabel sizeLabel = new JLabel("Size:");
 		JComboBox<String> sizeBox = new JComboBox<>(sizes);
-		JLabel difficultyLabel = new JLabel("Difficulty: ");
+		sizeBox.setSelectedItem(myProject.getSize());
+		JLabel difficultyLabel = new JLabel("Difficulty:");
 		JComboBox<String> difficultyBox = new JComboBox<>(difficulties);
+		difficultyBox.setSelectedItem(myProject.getDifficulty());
 		
 		sizeBox.addItemListener(e -> {
 			if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -161,11 +173,15 @@ public class RightViewPanel extends JPanel {
 			}
 		});
 		
+		JLabel modifiedLabel = new JLabel("Last Modified:");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		JLabel dateLabel = new JLabel(dateFormat.format(myProject.getLastModified()));
+		
 		JButton saveQuitButton = new JButton("Save & Quit");
 		JButton quitButton = new JButton("Quit");
 		
 		saveQuitButton.addActionListener(e -> {
-			myProject.setModified(new Date());
+			firePropertyChange("Date", myProject.getLastModified(), new Date());
 			firePropertyChange("Save Project", false, true);
 			myParent.dispatchEvent(new WindowEvent(myParent, WindowEvent.WINDOW_CLOSING));
 			
@@ -175,8 +191,8 @@ public class RightViewPanel extends JPanel {
 			myParent.dispatchEvent(new WindowEvent(myParent, WindowEvent.WINDOW_CLOSING));
 		});
 		
-		imageEditPanel.add(imageLabel);
-		imageEditPanel.add(imageButton);
+//		imageEditPanel.add(imageLabel);
+//		imageEditPanel.add(imageButton);
 		
 		sizePanel.add(sizeLabel);
 		sizePanel.add(sizeBox);
@@ -190,16 +206,21 @@ public class RightViewPanel extends JPanel {
 		innerSavePanel.add(saveQuitButton);
 		innerSavePanel.add(quitButton);
 		
-		savePanel.setLayout(new BorderLayout());
-		savePanel.add(innerSavePanel, BorderLayout.SOUTH);
+		updatedPanel.add(modifiedLabel);
+		updatedPanel.add(dateLabel);
+		
+//		savePanel.setLayout(new BorderLayout());
+//		savePanel.add(updatedPanel, BorderLayout.NORTH);
+//		savePanel.add(innerSavePanel);
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		add(imageEditPanel);
-		add(imagePanel);
+//		add(imageEditPanel);
+//		add(imagePanel);
 		add(budgetEditPanel);
 		add(budgetPanel);
 		add(sizePanel);
 		add(difficultyPanel);
-		add(savePanel);
+		add(updatedPanel);
+		add(innerSavePanel);
 	}
 }

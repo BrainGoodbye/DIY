@@ -48,7 +48,7 @@ public class ProjectViewListener implements PropertyChangeListener {
     /**
      * {@inheritDoc}
      * 
-     * Sets the attributes of 
+     * Sets the attributes of a given Project.
      * 
      * @author Joey Hunt
      */
@@ -62,6 +62,8 @@ public class ProjectViewListener implements PropertyChangeListener {
 			myProject.setSize((String)e.getNewValue());
 		} else if ("Difficulty".equals(e.getPropertyName())) {
 			myProject.setDifficulty((String)e.getNewValue());
+		} else if ("Date".equals(e.getPropertyName())) {
+			myProject.setModified((Date)e.getNewValue());
 		} else if ("Save Project".equals(e.getPropertyName())) {
 			pcs.firePropertyChange("Created Project", null, myProject);
 		} 

@@ -77,7 +77,7 @@ public class ProjectView extends JFrame {
 		
 		// Test constructor
 		myProject = new Project(new ArrayList<>(), new ArrayList<>(), 
-						"Test Project", "", "", 0.0, 0.0, new Date(), "Small", "Beginner");
+						"Name", "", "", 0.0, 0.0, new Date(), "Small", "Beginner");
 		
 		leftPanel = new LeftViewPanel(myProject);
 		
@@ -95,8 +95,17 @@ public class ProjectView extends JFrame {
 	 * @param theProject A project to view.
 	 */
 	public ProjectView(final Project theProject) {
-		super();
+		super("Project View");
+		
 		myProject = theProject;
+		
+		leftPanel = new LeftViewPanel(myProject);
+		
+		// The right panel needs a reference to its parent frame in order to close it.
+		rightPanel = new RightViewPanel(this, myProject);
+		viewListener = new ProjectViewListener(myProject);
+		
+		initialize();
 	}
 	
 	/**
