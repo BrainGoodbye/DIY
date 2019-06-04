@@ -66,27 +66,6 @@ public class ProjectView extends JFrame {
 	 * A listener for changes to project information.
 	 */
 	private ProjectViewListener viewListener;
-
-	/**
-	 * Instantiates the project view with no project.
-	 * 
-	 * @author Joey Hunt
-	 */
-	public ProjectView() {
-		super("Project View");
-		
-		// Test constructor
-		myProject = new Project(new ArrayList<>(), new ArrayList<>(), 
-						"Name", "", "", 0.0, 0.0, new Date(), "Small", "Beginner");
-		
-		leftPanel = new LeftViewPanel(myProject);
-		
-		// The right panel needs a reference to its parent frame in order to close it.
-		rightPanel = new RightViewPanel(this, myProject);
-		viewListener = new ProjectViewListener(myProject);
-		
-		initialize();
-	}
 	
 	/**
 	 * Instantiates the project view with a given project.
@@ -106,6 +85,16 @@ public class ProjectView extends JFrame {
 		viewListener = new ProjectViewListener(myProject);
 		
 		initialize();
+	}
+	
+	/**
+	 * Instantiates the project view with a default project.
+	 * 
+	 * @author Joey Hunt
+	 */
+	public ProjectView() {
+		this(new Project(new ArrayList<>(), new ArrayList<>(), 
+				"Name", "", "", 0.0, 0.0, new Date(), "Small", "Beginner"));
 	}
 	
 	/**
