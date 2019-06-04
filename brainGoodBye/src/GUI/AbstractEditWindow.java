@@ -1,14 +1,12 @@
 package GUI;
 
 import javax.swing.JFrame;
-import javax.swing.JRootPane;
-
 import brainGoodBye.Project;
 
 /**
  * 
  * @author Jacob Ficker
- *
+ * 
  */
 public abstract class AbstractEditWindow extends JFrame implements EditWindow{
 

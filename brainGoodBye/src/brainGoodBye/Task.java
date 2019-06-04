@@ -52,4 +52,17 @@ public class Task implements Cloneable {
 		return new Task(myHoursToComplete, myDescription, isDone);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		Task t = (Task) o;
+		return this.isDone == t.isDone() 
+				&& this.getDescription().equals(t.getDescription())
+				&& this.getHoursToComplete() == t.getHoursToComplete();
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
+	
 }
