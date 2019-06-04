@@ -98,7 +98,6 @@ public class HomeUI extends JFrame {
         optionsPanel.addPropertyChangeListener(projectPanel);
         projectPanel.addPropertyChangeListener("Added Project", fileManager);
         fileManager.addPropertyChangeListener("Import All", projectPanel);
-        
         //Add Stuff
 		this.setJMenuBar(menuBar);
 		

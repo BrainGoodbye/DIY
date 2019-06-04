@@ -29,6 +29,8 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	 */
 	private List<Thumbnail> myThumbnails;
 	
+	private String mySort = "Cost";
+	
 	/**
 	 * Creates the thumbnail panel.
 	 * 
@@ -75,13 +77,19 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	 * @param thumbnail
 	 */
 	public void addThumbnail(final Thumbnail thumbnail) {
+		Thumbnail temp = null;
+		for(Thumbnail thumb : myThumbnails) {
+			if(thumb.getProject()== thumbnail.getProject()) {
+				temp = thumb;
+			}
+		}
+		if(temp!=null)myThumbnails.remove(temp);
 		myThumbnails.add(thumbnail);
 		for(Thumbnail thumb: myThumbnails) {
 			thumb.addPropertyChangeListener(thumbnail);
 			thumbnail.addPropertyChangeListener(thumb);
 		}
-		add(thumbnail);
-		
+		sortBy(mySort);
 		revalidate();
 		repaint();
 	}
@@ -104,6 +112,7 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	 * @param selection A String corresponding to the total ordering of Thumbnails to use.
 	 */
 	public void sortBy(final String selection) {
+		mySort=selection;
 		this.removeAll();
 		switch(selection) {
 		case "Cost":

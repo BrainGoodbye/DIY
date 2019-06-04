@@ -112,9 +112,6 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		if ("New".equals(e.getPropertyName())) {
-			//TODO open an instance of ProjectView
-			final Project test = new Project(new ArrayList<>(), new ArrayList<>(), 
-					"Test Project", "hello", "", 0.0, 0.0, new Date(), "Large", "Big");
 			final ProjectView view = new ProjectView();
 			
 			view.getViewListener().addPropertyChangeListener("Created Project", this);
@@ -123,10 +120,9 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 			final Project project = (Project)e.getNewValue();
 			if(!myProjects.contains(project)) {
 				myProjects.add(project);
-				thumbnailPanel.addThumbnail(new Thumbnail(project, myOptions));
-				firePropertyChange("Added Project", null, myProjects);
 			}
-
+			firePropertyChange("Added Project", null, myProjects);
+			thumbnailPanel.addThumbnail(new Thumbnail(project, myOptions));
 			revalidate();
 			repaint();
 		} else if ("Delete".equals(e.getPropertyName())) {
@@ -149,6 +145,10 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 			
 			revalidate();
 			repaint();
+		} else if("Edit".equals(e.getPropertyName())) {
+			final ProjectView view = new ProjectView(((Thumbnail) e.getNewValue()).getProject());
+			
+			view.getViewListener().addPropertyChangeListener("Created Project", this);
 		}
 	}
 }
