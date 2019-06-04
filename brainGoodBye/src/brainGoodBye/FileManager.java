@@ -60,7 +60,7 @@ public final class FileManager implements PropertyChangeListener {
 	/**
 	 * @author Hunter
 	 */
-	private void updatePersistance() {
+	public void updatePersistance() {
 		File location = new File("data.txt");
 		
 		FileOutputStream file;

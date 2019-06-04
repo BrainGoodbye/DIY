@@ -1,27 +1,39 @@
 package GUI;
 
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-
-import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import brainGoodBye.Material;
 import brainGoodBye.Project;
 
+/**
+ * Window where you edit materials.
+ * @author Jacob Ficker
+ *
+ */
 public class MaterialsEditWindow extends AbstractEditWindow {
 
+	/**
+	 * generated UID
+	 */
+	private static final long serialVersionUID = 6435525123719217690L;
+	
 	private ArrayList<MaterialEdit> editFields;
 	private ArrayList<JButton> removeButtons;
 	private JButton saveButton;
 	private JButton cancelButton;
 	private JButton newButton;
+	private JPanel myPanel;
 	
+	/**
+	 * Basic Constructor
+	 * @author Jacob Ficker
+	 */
 	public MaterialsEditWindow(Project theProj) {
 		super(theProj, "Edit Materials");
 		
@@ -29,14 +41,18 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 		initialize();
 	}
 	
-	
+	/**
+	 * Loads the materials list into the editable fields.
+	 * @author Jacob Ficker
+	 */
 	public void initialize() {
 		
 		ArrayList<Material> theList = (ArrayList<Material>) myProject.getMaterialListCopy();
 		
-		this.setLayout(new BoxLayout(this, JFrame.DO_NOTHING_ON_CLOSE));
-		JLabel name = new JLabel("Edit Materials");
-		this.add(name);
+		
+		myPanel = new JPanel();
+		myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
+		JPanel bigPanel = new JPanel();
 		
 		editFields = new ArrayList<MaterialEdit>();
 		removeButtons = new ArrayList<JButton>();
@@ -47,101 +63,116 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 			
 			//add field for material
 			editFields.add(new MaterialEdit(m.getName(), m.getPrice(), m.getQuantity()));
-			this.add(editFields.get(i));
+			myPanel.add(editFields.get(i));
 			
 			//add remove button
-			JButton b = new JButton(new AbstractAction(Integer.toString(i)) {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					removeMe(Integer.parseInt(((JButton) e.getSource()).getActionCommand()));
-				}
-
-			});
-			b.setText("Remove Above Item");
+			JButton b = new JButton("Remove Above Item");
+			b.addActionListener(event -> removeMe(removeButtons.indexOf(b)));
 			removeButtons.add(b);
-			this.add(b);
-			
-			//Add new button
-			newButton = new JButton(new AbstractAction("Add New Material") {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					newMaterial();
-				}
-				
-			});
-			
-			//Add Save and Cancel buttons
-			saveButton = new JButton(new AbstractAction("Save and Close") {
-
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					save();
-				}
-				
-			});
-			
-			cancelButton = new JButton(new AbstractAction("Cancel") {
-
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					cancel();
-				}
-				
-			});
-			
-			JPanel bottomPanel = new JPanel(new BoxLayout(this, BoxLayout.X_AXIS));
-			
-			bottomPanel.add(saveButton);
-			bottomPanel.add(cancelButton);
-			this.add(bottomPanel);
+			myPanel.add(b);
 			
 			
 		}
 		
+
+		//Add new button
+		newButton = new JButton("Add New Material");
+		newButton.addActionListener(event -> newMaterial());
 		
+		//Add Save and Cancel buttons
+		saveButton = new JButton("Save and Close");
+		saveButton.addActionListener(event -> save());
+		
+		cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(event -> cancel());
+		
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+		
+		bottomPanel.add(newButton);
+		bottomPanel.add(saveButton);
+		bottomPanel.add(cancelButton);
+		
+		bottomPanel.setBorder(new EmptyBorder(10,10,10,10));
+		
+		bigPanel.setLayout(new BoxLayout(bigPanel, BoxLayout.PAGE_AXIS));
+		bigPanel.add(myPanel);
+		bigPanel.add(bottomPanel);
+		
+		
+		this.setContentPane(bigPanel);
+		this.pack();
 		
 	}
 	
+	/**
+	 * Removes a material from the list.
+	 * @author Jacob Ficker
+	 * @param i integer representing the location of the material in the array
+	 */
 	public void removeMe(int i) {
-		this.remove(editFields.get(i));
+		myPanel.remove(editFields.get(i));
 		editFields.remove(i);
-		this.remove(removeButtons.get(i));
+		myPanel.remove(removeButtons.get(i));
 		removeButtons.remove(i);
+		this.repaint();
+		this.revalidate();
+		this.pack();
 	}
 
+	/**
+	 * Saves materials list to the project.
+	 * @author Jacob Ficker
+	 */
 	@Override
 	public void save() {
 		ArrayList<Material> m = new ArrayList<Material>();
+		boolean allGood = true;
 		for(int i = 0; i < editFields.size(); i++) {
 			MaterialEdit field = editFields.get(i);
-			m.add(new Material(field.getName(), field.getQuantity(), field.getPrice(), field.isAcquired()));
+			String theName = field.getMyName();
+			int q = field.getQuantity();
+			double p = field.getPrice();
+			boolean acq = field.isAcquired();
+			if (theName.equals("INVALID INPUT") || q == -1 || p == -1) {
+				allGood = false;
+			}
+			m.add(new Material(theName, q, p, acq));
 		}
-		myProject.setMaterialsList(m);
-		this.cancel();
+		
+		if (allGood) {
+			this.cancel();
+			myProject.setMaterialsList(m);
+		} else {
+			JOptionPane.showMessageDialog(this, "One of your inputs is invalid. Please Make sure that your name is no longer than 75 characters,"
+											+ " and you only non-negative numbers for price and quantity.", "Invalid Input", JOptionPane.OK_OPTION);
+		}
 	}
 	
+	/**
+	 * Closes window.
+	 * @author Jacob Ficker
+	 */
 	public void cancel() {
 		this.dispose();
 	}
 
+	/**
+	 * Adds new blank material.
+	 * @author Jacob Ficker
+	 */
 	public void newMaterial() {
 		editFields.add(new MaterialEdit());
-		this.add(editFields.get(editFields.size() - 1));
+		myPanel.add(editFields.get(editFields.size() - 1));
 		
 		//add remove button
-		JButton b = new JButton(new AbstractAction(Integer.toString(editFields.size() - 1)) {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				removeMe(Integer.parseInt(((JButton) e.getSource()).getActionCommand()));
-			}
-
-		});
-		b.setText("Remove Above Item");
+		JButton b = new JButton("Remove Above Item");
+		b.addActionListener(event -> removeMe(removeButtons.indexOf(b)));
 		removeButtons.add(b);
-		this.add(b);
+		myPanel.add(b);
+		this.repaint();
+		this.revalidate();
+		this.pack();
 	}
 	
 	

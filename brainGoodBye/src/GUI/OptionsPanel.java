@@ -34,6 +34,8 @@ public class OptionsPanel extends JPanel{
 	
 	private JButton deleteButton;
 	
+	private JButton openProject;
+	
 	/**
 	 * 
 	 * 
@@ -56,10 +58,19 @@ public class OptionsPanel extends JPanel{
 		//TODO Fully implement add and delete functions.
 		JButton addProject = new JButton("New Project");
 		addProject.addActionListener(theEvent -> firePropertyChange("New", false, true));
+		
+		openProject = new JButton("Open Project");
+		openProject.setEnabled(false);
+		openProject.addActionListener(theEvent ->{
+			firePropertyChange("Edit",null,mySelected);
+			((JButton)theEvent.getSource()).setEnabled(false);
+			deleteButton.setEnabled(false);
+		});
 		deleteButton = new JButton("Delete");
 		deleteButton.addActionListener(theEvent -> {
 			firePropertyChange("Delete", false, mySelected);
 			((JButton)theEvent.getSource()).setEnabled(false);
+			openProject.setEnabled(false);
 		});
 		deleteButton.setEnabled(false);
 		
@@ -73,6 +84,8 @@ public class OptionsPanel extends JPanel{
 		this.add(Box.createRigidArea(new Dimension(5, 5)));
 		this.add(addProject);
 		this.add(Box.createRigidArea(new Dimension(5, 5)));
+		this.add(openProject);
+		this.add(Box.createRigidArea(new Dimension(5, 5)));
 		this.add(deleteButton);
 		this.setBackground(Color.LIGHT_GRAY);
 	}
@@ -84,6 +97,7 @@ public class OptionsPanel extends JPanel{
 	public void setSelected(Thumbnail selected) {
 		mySelected = selected;
 		deleteButton.setEnabled(true);
+		openProject.setEnabled(true);
 	}
 
 	    @Override

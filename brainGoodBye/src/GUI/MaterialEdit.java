@@ -2,87 +2,131 @@ package GUI;
 
 import java.awt.FlowLayout;
 
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
+/**
+ * 
+ * @author Jacob Ficker
+ *
+ */
 public class MaterialEdit extends JPanel {
 	/**
 	 * generated SUID
 	 */
 	private static final long serialVersionUID = -3364289024964437784L;
 	
-	private JTextArea name;
-	private JTextArea price;
-	private JTextArea quantity;
+	private JTextField name;
+	private JTextField price;
+	private JTextField quantity;
 	private boolean acquired;
 	
+	/**
+	 * @author Jacob Ficker
+	 */
 	public MaterialEdit() {
 		super();
-		name = new JTextArea();
-		price = new JTextArea();
-		quantity = new JTextArea();
+		name = new JTextField("Name");
+		price = new JTextField("0.00");
+		quantity = new JTextField("0");
 		acquired = false;
+		initialize();
 	}
 	
+	/**
+	 * @author Jacob Ficker
+	 * @param n
+	 * @param p
+	 * @param q
+	 */
 	public MaterialEdit(String n, double p, int q) {
-		super();
-		name = new JTextArea(n);
-		price = new JTextArea(Double.toString(p));
-		quantity = new JTextArea(Integer.toString(q));
+		name = new JTextField(n);
+		price = new JTextField(Double.toString(p));
+		quantity = new JTextField(Integer.toString(q));
 		acquired = false;
+		initialize();
 	}
 	
+	/**
+	 * @author Jacob Ficker
+	 * @param n
+	 * @param p
+	 * @param q
+	 * @param a
+	 */
 	public MaterialEdit(String n, double p, int q, boolean a) {
-		super();
-		name = new JTextArea(n);
-		price = new JTextArea(Double.toString(p));
-		quantity = new JTextArea(Integer.toString(q));
+		name = new JTextField(n);
+		price = new JTextField(Double.toString(p));
+		quantity = new JTextField(Integer.toString(q));
 		acquired = a;
+		initialize();
 	}
 
-	
-	public void initialize() {
+	/**
+	 * @author Jacob Ficker
+	 */
+	private void initialize() {
 		this.setLayout(new FlowLayout());
+		name.setColumns(25);
+		price.setColumns(9);
+		quantity.setColumns(5);
 		this.add(name);
 		this.add(price);
 		this.add(quantity);
 		this.setVisible(true);
 	}
 
+	/**
+	 * @author Jacob Ficker
+	 * @param b
+	 */
 	public void setAcquired(boolean b) {
 		acquired = b;
 	}
 	
+	/**
+	 * @author Jacob Ficker
+	 * @return
+	 */
 	public boolean isAcquired() { 
 		return acquired;
 	}
 	
+	/**
+	 * @author Jacob Ficker
+	 * @return
+	 */
 	public int getQuantity() {
 		int r = Integer.parseInt(quantity.getText());
-		if (r < 1) {
-			JOptionPane.showMessageDialog(this, "Invalid Quantity", "Invalid Input", JOptionPane.OK_OPTION);
+		if (r < 0) {
+			//JOptionPane.showMessageDialog(this, "Invalid Quantity", "Invalid Input", JOptionPane.OK_OPTION);
 		} else {
 			return r;
 		}
-		return 0;
+		return -1;
 	}
 	
+	/**
+	 * @author Jacob Ficker
+	 * @return
+	 */
 	public double getPrice() {
 		double d = Double.parseDouble(price.getText());
-		if (d <= 0) {
-			JOptionPane.showMessageDialog(this, "Invalid Price", "Invalid Input", JOptionPane.OK_OPTION);
+		if (d < 0) {
+			//JOptionPane.showMessageDialog(this, "Invalid Price", "Invalid Input", JOptionPane.OK_OPTION);
 		} else {
 			return d;
 		}
-		return 0.0;
+		return -1.0;
 	}
 	
-	public String getName() {
+	/**
+	 * @author Jacob Ficker
+	 * @return
+	 */
+	public String getMyName() {
 		if (name.getText().length() > 75) {
-			JOptionPane.showMessageDialog(this, "Name too long. Maximum size is 75 characters.", "Invalid Input", JOptionPane.OK_OPTION);
-			return "";
+			return "INVALID NAME";
 		} else {
 			return name.getText();
 		}
