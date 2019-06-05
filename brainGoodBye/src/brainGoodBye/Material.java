@@ -1,13 +1,19 @@
 package brainGoodBye;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Jacob Ficker
  *
  */
-public class Material implements Cloneable{
+public class Material implements Cloneable, Serializable{
 	
 	
+	/**
+	 * Generated SUID
+	 */
+	private static final long serialVersionUID = -5993446442313573690L;
 	private int myQuantity;
 	private Double myPrice;
 	private boolean isAcquired;
