@@ -1,7 +1,13 @@
 package brainGoodBye;
 
-public class Task implements Cloneable {
+import java.io.Serializable;
 
+public class Task implements Cloneable, Serializable {
+
+	/**
+	 * Generated SUID
+	 */
+	private static final long serialVersionUID = 4416485524825278158L;
 	private Double myHoursToComplete;
 	private String myDescription;
 	private boolean isDone;
