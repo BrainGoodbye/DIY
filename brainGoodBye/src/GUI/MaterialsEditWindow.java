@@ -1,11 +1,13 @@
 package GUI;
 
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import brainGoodBye.Material;
@@ -53,6 +55,8 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 		myPanel = new JPanel();
 		myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
 		JPanel bigPanel = new JPanel();
+		JScrollPane scrollPane = new JScrollPane(myPanel);
+		
 		
 		editFields = new ArrayList<MaterialEdit>();
 		removeButtons = new ArrayList<JButton>();
@@ -96,12 +100,13 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 		bottomPanel.setBorder(new EmptyBorder(10,10,10,10));
 		
 		bigPanel.setLayout(new BoxLayout(bigPanel, BoxLayout.PAGE_AXIS));
-		bigPanel.add(myPanel);
+		bigPanel.add(scrollPane);
 		bigPanel.add(bottomPanel);
 		
 		
 		this.setContentPane(bigPanel);
 		this.pack();
+		scrollPane.setMaximumSize(new Dimension(scrollPane.getWidth(), 700));
 		
 	}
 	
