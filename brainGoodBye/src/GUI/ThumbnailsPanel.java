@@ -36,7 +36,7 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	 * 
 	 * @author Joey Hunt
 	 */
-	ThumbnailsPanel() {
+	public ThumbnailsPanel() {
 		myThumbnails = new ArrayList<>();
 		initialize();
 	}
@@ -67,13 +67,8 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	
 	/**
 	 * 
-<<<<<<< HEAD
-	 * @author Hunter
-	 * @author Joey Hunt
-=======
 	 * @author Hunter Lantz
 	 * @author Joey Hunt (Minor edits)
->>>>>>> c45fbfddaab858f0bcf7ec7662a960bd90b1d1fe
 	 * @param thumbnail
 	 */
 	public void addThumbnail(final Thumbnail thumbnail) {
@@ -117,11 +112,15 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 		switch(selection) {
 		case "Cost":
 			Collections.sort(myThumbnails, (t1, t2) -> {
-				return (int) (t1.getProject().getCostPerMonth() - t2.getProject().getCostPerMonth());
+				return (int) (t1.getProject().totalCost() - t2.getProject().totalCost());
 			});
 		case "Name":
 			Collections.sort(myThumbnails, (t1, t2) -> {
 				return (int) (t1.getProject().getName().compareTo(t2.getProject().getName()));
+			});
+		case "Time":
+			Collections.sort(myThumbnails, (t1, t2) -> {
+				return (int)(t1.getProject().getTotalHours() - t2.getProject().getTotalHours());
 			});
 		}
 		

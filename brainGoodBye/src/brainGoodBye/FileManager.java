@@ -277,9 +277,7 @@ public final class FileManager implements PropertyChangeListener {
 			importSettings();
 		} else if ("EProjects".equals(theEvent.getPropertyName())) {
 			if (!myProjects.isEmpty()) {
-			exportAll();
-			} else {
-				//Message
+				exportAll();
 			}
 		} else if ("IProjects".equals(theEvent.getPropertyName())) {
 			importAll();
