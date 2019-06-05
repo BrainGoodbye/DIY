@@ -27,6 +27,9 @@ public class BudgetEditWindow extends AbstractEditWindow {
 	
 	JLabel previousSavingsPerMonthLabel;
 	JLabel previousCostPerMonthLabel;
+	JLabel enterSavingsPerMonthLabel;
+	JLabel enterCostPerMonthLabel;
+	JLabel blankSpaceLabel;
 	
 	JFormattedTextField savingsPerMonthTextField;
 	JFormattedTextField costPerMonthTextField;
@@ -46,10 +49,13 @@ public class BudgetEditWindow extends AbstractEditWindow {
 		previousSavingsPerMonthLabel.setText(String.valueOf("Previous savings-per-month: " + proj.getSavingsPerMonth()));
 		previousCostPerMonthLabel = new JLabel();
 		previousCostPerMonthLabel.setText("Previous cost-per-month: " + String.valueOf(proj.getCostPerMonth()));
+		enterSavingsPerMonthLabel = new JLabel("Enter the new savings per month here");
+		enterCostPerMonthLabel = new JLabel("Enter the new cost per month here");
 		savingsPerMonthTextField = new JFormattedTextField(new DecimalFormat());
 		costPerMonthTextField = new JFormattedTextField(new DecimalFormat());
 		saveAndCloseButton = new JButton("Save and Close");
 		cancelButton = new JButton("Cancel");
+		blankSpaceLabel = new JLabel("   ");
 		initialize();
 	}
 	
@@ -68,8 +74,11 @@ public class BudgetEditWindow extends AbstractEditWindow {
 		this.setContentPane(myPanel);
 		myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
 		myPanel.add(previousSavingsPerMonthLabel);
+		myPanel.add(enterSavingsPerMonthLabel);
 		myPanel.add(savingsPerMonthTextField);
+		myPanel.add(blankSpaceLabel);
 		myPanel.add(previousCostPerMonthLabel);
+		myPanel.add(enterCostPerMonthLabel);
 		myPanel.add(costPerMonthTextField);
 		myPanel.add(saveAndCloseButton);
 		myPanel.add(cancelButton);
