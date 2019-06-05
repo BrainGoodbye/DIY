@@ -67,7 +67,7 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 	
 	/**
 	 * Initializes the project panel.
-	 * 
+	 * @author Hunter Lantz
 	 * @author Joey Hunt
 	 */
 	private void initialize() {
@@ -84,31 +84,12 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 		
 		setBackground(Color.WHITE);
 	}
-	
-//	/**
-//	 * 
-//	 * 
-//	 * @author Joey Hunt
-//	 * @return
-//	 */
-//	public List<Project> getProjects() {
-//		return myProjects;
-//	}
-//	
-//	/**
-//	 * 
-//	 * 
-//	 * @author Joey Hunt
-//	 * @param theProjects
-//	 */
-//	public void setProjects(final List<Project> theProjects) {
-//		myProjects = theProjects;
-//	}
 
 	
 	/**
 	 * @author Hunter
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		if ("New".equals(e.getPropertyName())) {

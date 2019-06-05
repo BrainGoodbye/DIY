@@ -105,9 +105,11 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 		
 		
 		this.setContentPane(bigPanel);
+		if (editFields.size() == 0) {
+			newMaterial();
+		}
 		this.pack();
-		scrollPane.setMaximumSize(new Dimension(scrollPane.getWidth(), 700));
-		
+		this.setSize(this.getWidth()+100, this.getHeight()+150);
 	}
 	
 	/**
@@ -122,7 +124,6 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 		removeButtons.remove(i);
 		this.repaint();
 		this.revalidate();
-		this.pack();
 	}
 
 	/**
@@ -177,7 +178,6 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 		myPanel.add(b);
 		this.repaint();
 		this.revalidate();
-		this.pack();
 	}
 	
 	

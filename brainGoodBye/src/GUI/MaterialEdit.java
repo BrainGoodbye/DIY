@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.FlowLayout;
 
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -19,7 +21,7 @@ public class MaterialEdit extends JPanel {
 	private JTextField name;
 	private JTextField price;
 	private JTextField quantity;
-	private boolean acquired;
+	private JCheckBox acquired;
 	
 	/**
 	 * @author Jacob Ficker
@@ -29,7 +31,7 @@ public class MaterialEdit extends JPanel {
 		name = new JTextField("Name");
 		price = new JTextField("0.00");
 		quantity = new JTextField("0");
-		acquired = false;
+		acquired = new JCheckBox();
 		initialize();
 	}
 	
@@ -43,7 +45,7 @@ public class MaterialEdit extends JPanel {
 		name = new JTextField(n);
 		price = new JTextField(Double.toString(p));
 		quantity = new JTextField(Integer.toString(q));
-		acquired = false;
+		acquired = new JCheckBox();
 		initialize();
 	}
 	
@@ -58,7 +60,8 @@ public class MaterialEdit extends JPanel {
 		name = new JTextField(n);
 		price = new JTextField(Double.toString(p));
 		quantity = new JTextField(Integer.toString(q));
-		acquired = a;
+		acquired = new JCheckBox();
+		acquired.setSelected(a);
 		initialize();
 	}
 
@@ -73,6 +76,8 @@ public class MaterialEdit extends JPanel {
 		this.add(name);
 		this.add(price);
 		this.add(quantity);
+		this.add(new JLabel("Acquired"));
+		this.add(acquired);
 		this.setVisible(true);
 	}
 
@@ -81,7 +86,7 @@ public class MaterialEdit extends JPanel {
 	 * @param b
 	 */
 	public void setAcquired(boolean b) {
-		acquired = b;
+		acquired.setSelected(b);;
 	}
 	
 	/**
@@ -89,7 +94,7 @@ public class MaterialEdit extends JPanel {
 	 * @return
 	 */
 	public boolean isAcquired() { 
-		return acquired;
+		return acquired.isSelected();
 	}
 	
 	/**
