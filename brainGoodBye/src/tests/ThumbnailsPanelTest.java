@@ -27,6 +27,9 @@ public class ThumbnailsPanelTest {
 
 	/**
 	 * Test method for {@link GUI.ThumbnailsPanel#sortBy()}.
+	 * Becuase ThumbnailsPanel is a loosely-coupled class in a different package with private methods that need testing,
+	 * an abnormal way to access its methods for testing is needed.
+	 * Here, reflection is used, which works well but has the potential to throw many exceptions.
 	 * @author Thaddaeus
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
@@ -38,7 +41,7 @@ public class ThumbnailsPanelTest {
 	@Test
 	public final void testSortBy() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, NoSuchFieldException {
 		
-		// setting up objects to be sorted by the sort by
+		// setting up Thumbnail objects to be sorted by ThumbnailsPanel's sortBy()
 		OptionsPanel optionsPanel = new OptionsPanel();
 		ThumbnailsPanel panel = new ThumbnailsPanel();
 		
@@ -89,31 +92,30 @@ public class ThumbnailsPanelTest {
 		// using Java's Reflection libraries to access private methods and fields
         Field thumbnails = ThumbnailsPanel.class.getDeclaredField("myThumbnails");
         thumbnails.setAccessible(true);
-        thumbnails.set(panel, thumbsList);
+        thumbnails.set(panel, thumbsList); // replace the class's thumbnail list with the above created thumbnail list
 
 		Method sort = ThumbnailsPanel.class.getDeclaredMethod("sortBy", String.class);
 		sort.setAccessible(true);
 		
-		// return type of importSettings is null, so no need to store its return value
-		sort.invoke(panel, "Name");
 		@SuppressWarnings("unchecked")
-        List<Thumbnail> testList = (List<Thumbnail>) thumbnails.get(panel);
-//        for (int i = 0; i < thumbsList.size() - 1; i++) {
-//        	System.out.println("first: " + thumbsList.get(i).getProject().totalCost() + " second: " + thumbsList.get(i + 1).getProject().totalCost());
-//        	assertTrue(thumbsList.get(i).getProject().totalCost() >= thumbsList.get(i + 1).getProject().totalCost());
-//        }
+		List<Thumbnail> thumbs = (List<Thumbnail>) thumbnails.get(panel); // get a reference to the class's thumbnail list field (private)
+		
+		// check that thumbnails are properly sorted by Cost
+        sort.invoke(panel, "Cost");
+        for (int i = 0; i < thumbs.size() - 1; i++) {
+        	assertTrue(thumbs.get(i).getProject().totalCost() <= thumbs.get(i + 1).getProject().totalCost());
+        }
         
-//        sort.invoke(panel, "time");
-//        for (int i = 0; i < thumbsList.size() - 1; i++) {
-//        	assertTrue(thumbsList.get(i).getProject().getTotalHours() <= thumbsList.get(i + 1).getProject().getTotalHours());
-//        }
+		// check that thumbnails are properly sorted by Time
+        sort.invoke(panel, "Time");
+        for (int i = 0; i < thumbs.size() - 1; i++) {
+        	assertTrue(thumbs.get(i).getProject().getTotalHours() <= thumbs.get(i + 1).getProject().getTotalHours());
+        }
         
-//
-//        sort.invoke(panel, "Name");
-//        thumbsList = (List<Thumbnail>) thumbnails.get(panel);
-        for (int i = 0; i < testList.size() - 1; i++) {
-        	System.out.println("first: " + thumbsList.get(i).getProject().getName() + " second: " + thumbsList.get(i + 1).getProject().getName());
-//        	assertTrue(thumbsList.get(i).getProject().getName().compareTo(thumbsList.get(i + 1).getProject().getName()) <= 0);
+		// check that thumbnails are properly sorted by Name
+        sort.invoke(panel, "Name");
+        for (int i = 0; i < thumbs.size() - 1; i++) {
+        	assertTrue(thumbs.get(i).getProject().getName().compareTo(thumbs.get(i + 1).getProject().getName()) <= 0);
         }
 	}
 
