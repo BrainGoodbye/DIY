@@ -50,42 +50,68 @@ public final class FileManager implements PropertyChangeListener {
 	 * @author Thaddaeus
 	 */
 	public FileManager() {
-		// TODO Get intially selected sorting option directly, in case it changes.
+		// TODO Get initially selected sorting option directly, in case it changes.
 		mySettings = "Cost";
 		currentPath = ".";
 		myProjects = new ArrayList<>();
-		loadPersistance();
+		loadPersistence();
 	}
 	
 	/**
-	 * @author Hunter
+	 * Deserializes a list of projects from the given file and lets all interested parties know by property change listener
+	 * @author Thaddaeus
+	 * @param file the file to deserialize
+	 * @return
 	 */
-	public void updatePersistance() {
-		File location = new File("data.txt");
-		
-		FileOutputStream file;
+	private void deserializeFile(File file) {
 		try {
-			file = new FileOutputStream(location);
-			ObjectOutputStream byteStream = new ObjectOutputStream(file); // connect the byte stream to the file stream
-		    byteStream.writeObject(myProjects); // write objects to a byte stream for putting in a file
-		    byteStream.close(); 
-		    file.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			FileInputStream fileinputStream = new FileInputStream(file); // stream to read file from
+			ObjectInputStream in = new ObjectInputStream(fileinputStream); // stream to read objects from, converted from file stream
+
+			@SuppressWarnings("unchecked") // not known for sure the type of the deserialized object
+			List<Project> projects = (List<Project>) in.readObject();
+			myProjects = projects;
+			pcs.firePropertyChange("Import All", null, projects);
+			
+			in.close(); 
+			fileinputStream.close(); 
+		} catch (IOException | ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Error: file could not be read.");
 		}
-		
-		updatePersistantSettings();
-       
+	}
+	
+	/**
+	 * Saves the myProjects list in a serialized state to the given file.
+	 * @author Thaddaeus
+	 * @param file the file to save to
+	 */
+	private void serializeToFile(File file) {
+		try {
+            FileOutputStream outputStream = new FileOutputStream(file); // a file stream for writing the serialized objects two.
+            ObjectOutputStream byteStream = new ObjectOutputStream(outputStream); // connect the byte stream to the file stream
+            byteStream.writeObject(myProjects); // write objects to a byte stream for putting in a file
+            byteStream.close(); 
+            outputStream.close();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error: file could not be read.");
+		}
+	}
+	
+	/**
+	 * Updates the persistent data storage storing application data including projects and settings.
+	 * @author Hunter
+	 * @author Thaddaeus
+	 */
+	public void updatePersistence() {
+		File file = new File("data.txt");
+		serializeToFile(file);
+		updatePersistentSettings();
 	}
 	
 	/**
 	 * @author Hunter
 	 */
-	private void updatePersistantSettings() {
+	private void updatePersistentSettings() {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(new File("settings.txt")));
 			writer.write(mySettings);
@@ -97,36 +123,25 @@ public final class FileManager implements PropertyChangeListener {
 	}
 	
 	/**
+	 * Loads the persistent data storage for the application into 
+	 * memory for the application to use, including projects and settings.
 	 * @author Hunter
+	 * @author Thaddaeus
 	 */
-	public void loadPersistance() {
-		FileInputStream file;
-		File location = new File("data.txt");
-		System.out.println(location.length());
-		if(location.length()==0)return;
-		try {
-			file = new FileInputStream(location);
-			ObjectInputStream in = new ObjectInputStream(file); // stream to read objects from, converted from file stream
-
-			@SuppressWarnings("unchecked") // not known for sure the type of the deserialized object
-			List<Project> projects = (List<Project>) in.readObject();
-
-			pcs.firePropertyChange("Import All", null, projects);
-
-			in.close(); 
-			file.close(); 
-		} catch (IOException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void loadPersistence() {
+		File file = new File("data.txt");
+		if (file.length() == 0) { // no persistent data to use
+			return;
 		}
-		loadPersistantSettings();
+		deserializeFile(file);
+		loadPersistentSettings();
 	}
 	
 	
 	/**
 	 * @author Hunter Lantz
 	 */
-	public void loadPersistantSettings() {
+	public void loadPersistentSettings() {
 		try (FileReader fr = new FileReader("settings.txt");
                 BufferedReader br = new BufferedReader(fr)) {
 			pcs.firePropertyChange("Import Settings", null, br.readLine());
@@ -188,21 +203,11 @@ public final class FileManager implements PropertyChangeListener {
 	 * @author Thaddaeus
 	 */
 	private final void exportAll() {
-		//List<Project> object = projects;
-		
 		final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
 		int returnVal = chooser.showSaveDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-			File saved = chooser.getSelectedFile();
-			try {
-	            FileOutputStream file = new FileOutputStream(saved); // a file stream for writing the serialized objects two.
-	            ObjectOutputStream byteStream = new ObjectOutputStream(file); // connect the byte stream to the file stream
-	            byteStream.writeObject(myProjects); // write objects to a byte stream for putting in a file
-	            byteStream.close(); 
-	            file.close();
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "Error: file could not be read.");
-			}
+			File file = chooser.getSelectedFile();
+			serializeToFile(file);
 	    }	
 	}
 	
@@ -216,21 +221,10 @@ public final class FileManager implements PropertyChangeListener {
 		final JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
 		int returnVal = chooser.showOpenDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-			File saved = chooser.getSelectedFile();
-			try {
-				FileInputStream file = new FileInputStream(saved); // stream to read file from
-				ObjectInputStream in = new ObjectInputStream(file); // stream to read objects from, converted from file stream
-
-				@SuppressWarnings("unchecked") // not known for sure the type of the deserialized object
-				List<Project> projects = (List<Project>) in.readObject();
-
-				pcs.firePropertyChange("Import All", null, projects);
-
-				in.close(); 
-				file.close(); 
-			} catch (IOException | ClassNotFoundException e) {
-				JOptionPane.showMessageDialog(null, "Error: file could not be read.");
-			}
+			File file = chooser.getSelectedFile();
+			deserializeFile(file);
+			 // imported the projects for this application from a file, so update what should be persisted on close
+			updatePersistence();
 		}
 	}
 	
@@ -270,7 +264,7 @@ public final class FileManager implements PropertyChangeListener {
 	public void propertyChange(final PropertyChangeEvent theEvent) {
 		if ("Sort".equals(theEvent.getPropertyName())) {
 			mySettings = (String)theEvent.getNewValue();
-			updatePersistantSettings();
+			updatePersistentSettings();
 		} else if ("ESettings".equals(theEvent.getPropertyName())) {
 			exportSettings();
 		} else if ("ISettings".equals(theEvent.getPropertyName())) {
@@ -283,10 +277,10 @@ public final class FileManager implements PropertyChangeListener {
 			importAll();
 		} else if ("Added Project".equals(theEvent.getPropertyName())) {
 			myProjects = (List<Project>)theEvent.getNewValue();
-			updatePersistance();
+			updatePersistence();
 		} else if("Delete".equals(theEvent.getPropertyName())) {
 			myProjects.remove(((Thumbnail)theEvent.getNewValue()).getProject());
-			updatePersistance();
+			updatePersistence();
 		}
 	}
 
