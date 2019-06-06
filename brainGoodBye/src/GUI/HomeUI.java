@@ -106,7 +106,7 @@ public class HomeUI extends JFrame {
 		this.add(projectPanel, BorderLayout.CENTER);
 		
 		this.getContentPane().setBackground(Color.WHITE);
-		fileManager.loadPersistance();
+		fileManager.loadPersistence();
 		//You Can SEE ME NOW
 		this.setVisible(true);
 	}

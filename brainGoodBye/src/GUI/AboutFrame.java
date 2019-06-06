@@ -28,7 +28,8 @@ public class AboutFrame extends JFrame {
 	private static final long serialVersionUID = 267274501183431022L;
 
 	/**
-	 * Instantiates the frame.
+	 * Creates and displays the about frame.
+	 * @author Thaddaeus
 	 */
 	public AboutFrame() {
 		this.setTitle("About");
