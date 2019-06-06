@@ -1,7 +1,5 @@
 package GUI;
 
-
-import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -66,13 +64,13 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 			Material m = theList.get(i);
 			
 			//add field for material
-			editFields.add(new MaterialEdit(m.getName(), m.getPrice(), m.getQuantity()));
+			editFields.add(new MaterialEdit(m.getName(), m.getPrice(), m.getQuantity(), m.isAcquired()));
 			myPanel.add(editFields.get(i));
 			
 			//add remove button
 			JButton b = new JButton("Remove Above Item");
-			b.addActionListener(event -> removeMe(removeButtons.indexOf(b)));
 			removeButtons.add(b);
+			b.addActionListener(event -> removeMe(removeButtons.indexOf(b)));
 			myPanel.add(b);
 			
 			
@@ -147,8 +145,8 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 		}
 		
 		if (allGood) {
-			this.cancel();
 			myProject.setMaterialsList(m);
+			this.cancel();
 		} else {
 			JOptionPane.showMessageDialog(this, "One of your inputs is invalid. Please Make sure that your name is no longer than 75 characters,"
 											+ " and you only non-negative numbers for price and quantity.", "Invalid Input", JOptionPane.OK_OPTION);
