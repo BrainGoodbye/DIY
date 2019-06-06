@@ -104,6 +104,7 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	 * Sorts the project thumbnails according to user selection.
 	 * @author Hunter
 	 * @author Joey Hunt
+	 * @author Thaddaeus
 	 * @param selection A String corresponding to the total ordering of Thumbnails to use.
 	 */
 	public void sortBy(final String selection) {
@@ -114,14 +115,17 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 			Collections.sort(myThumbnails, (t1, t2) -> {
 				return (int) (t1.getProject().totalCost() - t2.getProject().totalCost());
 			});
+			break;
 		case "Name":
 			Collections.sort(myThumbnails, (t1, t2) -> {
 				return (int) (t1.getProject().getName().compareTo(t2.getProject().getName()));
 			});
+			break;
 		case "Time":
 			Collections.sort(myThumbnails, (t1, t2) -> {
 				return (int)(t1.getProject().getTotalHours() - t2.getProject().getTotalHours());
 			});
+			break;
 		}
 		
 		createThumbnails();
