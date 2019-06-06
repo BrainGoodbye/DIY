@@ -38,7 +38,8 @@ public class FileManagerTest {
 		FileManager manager = new FileManager();
 		Method method = FileManager.class.getDeclaredMethod("importSettings", String.class);
 		method.setAccessible(true);
-		String output = (String) method.invoke(manager, "some input");
+		// return type of importSettings is null, so no need to store its return value
+		method.invoke(manager, "some input");
 	}
 	
 	/**
