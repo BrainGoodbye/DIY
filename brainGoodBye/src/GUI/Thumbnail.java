@@ -47,7 +47,7 @@ public class Thumbnail extends JPanel implements MouseListener, PropertyChangeLi
 	 * @author Joey Hunt
 	 * @author Hunter Lantz
 	 */
-	Thumbnail(final Project project, OptionsPanel options) {
+	public Thumbnail(final Project project, OptionsPanel options) {
 		myProject = project; 
 		myOptions=options;
 		this.setLayout(new BorderLayout());

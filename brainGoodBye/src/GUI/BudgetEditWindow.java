@@ -46,9 +46,9 @@ public class BudgetEditWindow extends AbstractEditWindow {
 		myProject = proj;
 		myPanel = new JPanel();
 		previousSavingsPerMonthLabel = new JLabel();
-		previousSavingsPerMonthLabel.setText(String.valueOf("Previous savings-per-month: " + proj.getSavingsPerMonth()));
+		previousSavingsPerMonthLabel.setText(String.valueOf("Previous savings-per-month: $" + proj.getSavingsPerMonth()));
 		previousCostPerMonthLabel = new JLabel();
-		previousCostPerMonthLabel.setText("Previous cost-per-month: " + String.valueOf(proj.getCostPerMonth()));
+		previousCostPerMonthLabel.setText("Previous cost-per-month: $" + String.valueOf(proj.getCostPerMonth()));
 		enterSavingsPerMonthLabel = new JLabel("Enter the new savings per month here");
 		enterCostPerMonthLabel = new JLabel("Enter the new cost per month here");
 		savingsPerMonthTextField = new JFormattedTextField(new DecimalFormat());
