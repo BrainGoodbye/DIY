@@ -1,4 +1,4 @@
-package GUI;
+package projectView;
 
 import java.text.DecimalFormat;
 import javax.swing.BoxLayout;

@@ -1,4 +1,4 @@
-package GUI;
+package projectView;
 
 import java.awt.BorderLayout;
 import java.awt.event.ItemEvent;

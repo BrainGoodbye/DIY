@@ -1,4 +1,4 @@
-package GUI;
+package homeUI;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
