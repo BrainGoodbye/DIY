@@ -1,6 +1,7 @@
-package GUI;
+package projectView;
 
 import javax.swing.JFrame;
+
 import brainGoodBye.Project;
 
 /**

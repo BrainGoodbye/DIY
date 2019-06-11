@@ -1,4 +1,4 @@
-package GUI;
+package projectView;
 
 public interface EditWindow {
 	

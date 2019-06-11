@@ -1,25 +1,24 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 import org.junit.Test;
 
 import brainGoodBye.Version;
 
 /**
- * @author Joey Hunt
- *
  * Tests the Version class for proper functionality.
+ * 
+ * @author Joey Hunt
+ * @author Thad Hug
  */
 public class VersionTest {
 
 	/**
 	 * Test method for {@link brainGoodBye.Version#setVersion()}.
+	 * 
+	 * @author Thad Hug
+	 * @author Joey Hunt (initial version)
 	 */
 	@Test
 	public void testSetVersion() {

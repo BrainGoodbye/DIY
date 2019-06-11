@@ -1,4 +1,4 @@
-package GUI;
+package projectView;
 
 import java.util.ArrayList;
 import javax.swing.BoxLayout;

@@ -1,4 +1,4 @@
-package GUI;
+package homeUI;
 
 import java.awt.Color;
 import java.awt.event.ItemEvent;

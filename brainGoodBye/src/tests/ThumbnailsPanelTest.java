@@ -11,12 +11,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-import GUI.OptionsPanel;
-import GUI.Thumbnail;
-import GUI.ThumbnailsPanel;
 import brainGoodBye.Material;
 import brainGoodBye.Project;
 import brainGoodBye.Task;
+import homeUI.OptionsPanel;
+import homeUI.Thumbnail;
+import homeUI.ThumbnailsPanel;
 
 /**
  * A class for testing the ThumbnailsPanel class
@@ -26,7 +26,7 @@ import brainGoodBye.Task;
 public class ThumbnailsPanelTest {
 
 	/**
-	 * Test method for {@link GUI.ThumbnailsPanel#sortBy()}.
+	 * Test method for {@link homeUI.ThumbnailsPanel#sortBy()}.
 	 * Becuase ThumbnailsPanel is a loosely-coupled class in a different package with private methods that need testing,
 	 * an abnormal way to access its methods for testing is needed.
 	 * Here, reflection is used, which works well but has the potential to throw many exceptions.
