@@ -2,6 +2,11 @@ package brainGoodBye;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Jacob Ficker
+ * @author Joey Hunt (minor edits)
+ */
 public class Task implements Cloneable, Serializable {
 
 	/**
@@ -115,10 +120,17 @@ public class Task implements Cloneable, Serializable {
 	
 	/**
 	 * @author Jacob Ficker
+	 * @author Joey Hunt (minor edits)
 	 */
 	@Override
 	public int hashCode() {
-		return this.toString().hashCode();
+		final int prime = 31;
+		int result = 1;
+		
+		result = (int) (prime * result + getHoursToComplete());
+		result = prime * result + getDescription().hashCode();
+		
+		return result;
 	}
 	
 }

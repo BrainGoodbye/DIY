@@ -4,11 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,7 +34,6 @@ public class AboutFrame extends JFrame {
 		this.setSize(400, 400);
 		JLabel textLabel = new JLabel();
 		
-		//final ImageIcon icon = new ImageIcon(getClass().getResource("/brain_hand.jpg"));
 		final Image image = Toolkit.getDefaultToolkit().
 				getImage(getClass().getResource("/brain_hand.jpg")).
 				getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);

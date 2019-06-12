@@ -1,25 +1,17 @@
 package projectView;
 
-import java.awt.BorderLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import brainGoodBye.Project;
 
@@ -64,7 +56,7 @@ public class RightViewPanel extends JPanel {
 	/**
 	 * A panel for viewing the budget.
 	 */
-	private JPanel budgetPanel;
+//	private JPanel budgetPanel;
 	
 	/**
 	 * A panel for changing the size.
@@ -79,7 +71,7 @@ public class RightViewPanel extends JPanel {
 	/**
 	 * A panel for saving or quitting the view.
 	 */
-	private JPanel savePanel;
+	//private JPanel savePanel;
 	
 	/**
 	 * A helper panel for savePanel.
@@ -113,11 +105,11 @@ public class RightViewPanel extends JPanel {
 //		imageEditPanel = new JPanel();
 //		imagePanel = new JPanel();
 		budgetEditPanel = new JPanel();
-		budgetPanel = new JPanel();
+//		budgetPanel = new JPanel();
 		sizePanel = new JPanel();
 		difficultyPanel = new JPanel();
 		updatedPanel = new JPanel();
-		savePanel = new JPanel();
+//		savePanel = new JPanel();
 		innerSavePanel = new JPanel();
 		myProject = theProject;
 		
@@ -217,7 +209,7 @@ public class RightViewPanel extends JPanel {
 //		add(imageEditPanel);
 //		add(imagePanel);
 		add(budgetEditPanel);
-		add(budgetPanel);
+//		add(budgetPanel);
 		add(sizePanel);
 		add(difficultyPanel);
 		add(updatedPanel);
