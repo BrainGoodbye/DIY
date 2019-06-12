@@ -31,6 +31,7 @@ public class ThumbnailsPanelTest {
 	 * an abnormal way to access its methods for testing is needed.
 	 * Here, reflection is used, which works well but has the potential to throw many exceptions.
 	 * @author Thaddaeus
+	 * @author Jacob Ficker
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
 	 * @throws IllegalAccessException 
@@ -116,6 +117,18 @@ public class ThumbnailsPanelTest {
         sort.invoke(panel, "Name");
         for (int i = 0; i < thumbs.size() - 1; i++) {
         	assertTrue(thumbs.get(i).getProject().getName().compareTo(thumbs.get(i + 1).getProject().getName()) <= 0);
+        }
+        
+        // check that thumbnails are properly sorted by Size
+        sort.invoke(panel, "Size");
+        for (int i = 0; i < thumbs.size() - 1; i++) {
+        	ArrayList<String> sizes = new ArrayList<String>();
+    		sizes.add("Small");
+    		sizes.add("Medium");
+    		sizes.add("Large");
+    		int currentSize = sizes.indexOf(thumbs.get(i).getProject().getSize());
+    		int nextSize = sizes.indexOf(thumbs.get(i +1).getProject().getSize());
+        	assertTrue(currentSize <= nextSize);
         }
 	}
 
