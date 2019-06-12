@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 
  * @author Jacob Ficker
- *
+ * @author Joey Hunt (minor edits)
  */
 public class Material implements Cloneable, Serializable{
 	
@@ -20,6 +20,8 @@ public class Material implements Cloneable, Serializable{
 	private String myName;
 	
 	/**
+	 * This is the basic constructor for making a new material.
+	 * The material created will be set to not acquired yet.
 	 * @author Jacob Ficker
 	 * @param nam
 	 * @param quant
@@ -33,6 +35,8 @@ public class Material implements Cloneable, Serializable{
 	}
 	
 	/**
+	 * This is the constructor allows the specification of whether or not
+	 * the material has already been acquired.
 	 * @author Jacob Ficker
 	 * @param name
 	 * @param quantity
@@ -140,10 +144,18 @@ public class Material implements Cloneable, Serializable{
 	
 	/**
 	 * @author Jacob Ficker
+	 * @author Joey Hunt (minor edits)
 	 */
 	@Override
 	public int hashCode() {
-		return this.toString().hashCode();
+		final int prime = 31;
+		int result = 1;
+		
+		result = prime * result + getName().hashCode();
+		result = (int) (prime * result + getPrice());
+		result = prime * result + getQuantity();
+		
+		return result;
 	}
 	
 }

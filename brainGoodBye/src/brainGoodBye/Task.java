@@ -2,6 +2,11 @@ package brainGoodBye;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Jacob Ficker
+ * @author Joey Hunt (minor edits)
+ */
 public class Task implements Cloneable, Serializable {
 
 	/**
@@ -13,6 +18,7 @@ public class Task implements Cloneable, Serializable {
 	private boolean isDone;
 	
 	/**
+	 * Basic constructor. Assumes task is not yet completed.
 	 * @author Jacob Ficker
 	 * @param hours
 	 * @param desc
@@ -24,6 +30,8 @@ public class Task implements Cloneable, Serializable {
 	}
 	
 	/**
+	 * This constructor allows the specification of whether or not
+	 * a task is completed.
 	 * @author Jacob Ficker
 	 * @param hours
 	 * @param desc
@@ -112,10 +120,17 @@ public class Task implements Cloneable, Serializable {
 	
 	/**
 	 * @author Jacob Ficker
+	 * @author Joey Hunt (minor edits)
 	 */
 	@Override
 	public int hashCode() {
-		return this.toString().hashCode();
+		final int prime = 31;
+		int result = 1;
+		
+		result = (int) (prime * result + getHoursToComplete());
+		result = prime * result + getDescription().hashCode();
+		
+		return result;
 	}
 	
 }
