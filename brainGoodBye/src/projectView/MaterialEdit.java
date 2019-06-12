@@ -24,6 +24,7 @@ public class MaterialEdit extends JPanel {
 	private JCheckBox acquired;
 	
 	/**
+	 * Initializes with fields containting zero and "Name"
 	 * @author Jacob Ficker
 	 */
 	public MaterialEdit() {
@@ -36,10 +37,11 @@ public class MaterialEdit extends JPanel {
 	}
 	
 	/**
+	 * Initializes the fields to specified values (except the acquired field)
 	 * @author Jacob Ficker
-	 * @param n
-	 * @param p
-	 * @param q
+	 * @param n Name
+	 * @param p Price
+	 * @param q Quantity
 	 */
 	public MaterialEdit(String n, double p, int q) {
 		name = new JTextField(n);
@@ -50,11 +52,12 @@ public class MaterialEdit extends JPanel {
 	}
 	
 	/**
+	 * Initializes all fields to specified values
 	 * @author Jacob Ficker
-	 * @param n
-	 * @param p
-	 * @param q
-	 * @param a
+	 * @param n Name
+	 * @param p Price
+	 * @param q Quantity
+	 * @param a boolean representing whether or not this material has been required
 	 */
 	public MaterialEdit(String n, double p, int q, boolean a) {
 		name = new JTextField(n);
@@ -66,6 +69,7 @@ public class MaterialEdit extends JPanel {
 	}
 
 	/**
+	 * Sets up GUI elements and makes the visible
 	 * @author Jacob Ficker
 	 */
 	private void initialize() {
