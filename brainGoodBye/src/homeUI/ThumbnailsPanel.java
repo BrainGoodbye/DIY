@@ -110,6 +110,10 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 	public void sortBy(final String selection) {
 		mySort=selection;
 		this.removeAll();
+		ArrayList<String> size = new ArrayList<String>();
+		size.add("Small");
+		size.add("Medium");
+		size.add("Large");
 		switch(selection) {
 		case "Cost":
 			Collections.sort(myThumbnails, (t1, t2) -> {
@@ -126,6 +130,11 @@ public class ThumbnailsPanel extends JPanel implements PropertyChangeListener {
 				return (int)(t1.getProject().getTotalHours() - t2.getProject().getTotalHours());
 			});
 			break;
+		case "Size":
+			Collections.sort(myThumbnails, (t1, t2) -> {
+				int answre = (int)(size.indexOf(t1.getProject().getSize()) - size.indexOf(t2.getProject().getSize()));
+				return answre;
+			});
 		}
 		
 		createThumbnails();
