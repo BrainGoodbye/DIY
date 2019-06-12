@@ -1,14 +1,17 @@
 package brainGoodBye;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import javax.swing.JOptionPane;
 
 /**
+ * This class represents the most recent version of our program.
+ * 
  * @author Hunter Lantz
  * @author Thaddaeus Hug
- * 
- * This class represents the most recent version of our program.
+ * @author Joey Hunt (minor edits)
  */
 public final class Version {
 
@@ -19,31 +22,39 @@ public final class Version {
 	
 	/**
 	 * Prevents instantiation.
+	 * 
+	 * @author Thad Hug
 	 */
 	private Version() {
 		
 	}
 	
-	
 	/**
 	 * Sets the program version.
+	 * 
+	 * @author Thad Hug
+	 * @author Joey Hunt (minor edits)
 	 */
 	public static void setVersion() {
-		File file = new File("version.txt");
-		try {
-			Scanner scanner = new Scanner(file);
-			while(scanner.hasNextLine()) {
-				VERSION = VERSION + scanner.nextLine() + "\n";
-			}
-			scanner.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		final StringBuilder builder = new StringBuilder();
+		
+		try (InputStreamReader inputStream = new InputStreamReader(Version.class.
+				getResourceAsStream("/version.txt"));
+				BufferedReader reader = new BufferedReader(inputStream)) {
+			reader.lines().forEach(line -> {
+				builder.append(line);
+			});
+			
+			VERSION = builder.toString();
+		} catch (final IOException e) {
+			JOptionPane.showMessageDialog(null, "Error: version could not be found.");
 		}
 	}
 	
 	/**
 	 * Returns the program's current version.
 	 * 
+	 * @author Thad Hug
 	 * @return The project version.
 	 */
 	public static String getVersion() {
