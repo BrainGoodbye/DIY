@@ -11,6 +11,11 @@ import javax.swing.JScrollPane;
 import brainGoodBye.Project;
 import brainGoodBye.Task;
 
+/**
+ * The window where the task list can be edited.
+ * @author Jacob Ficker
+ *
+ */
 public class TaskListEditWindow extends AbstractEditWindow {
 
 	/**
@@ -24,6 +29,11 @@ public class TaskListEditWindow extends AbstractEditWindow {
 	private JButton newButton;
 	private JPanel myPanel;
 	
+	/**
+	 * Basic Constructor.
+	 *@author Jacob Ficker
+	 * @param theProj
+	 */
 	public TaskListEditWindow(Project theProj) {
 		super(theProj, "Edit Tasks");
 		editFields = new ArrayList<TaskEdit>();
@@ -32,6 +42,11 @@ public class TaskListEditWindow extends AbstractEditWindow {
 		initialize();
 	}
 
+	/**
+	 * Loads task list into editable fields and
+	 * then makes thos fields visible to the user.
+	 * @author Jacob Ficker
+	 */
 	private void initialize() {
 		
 		myPanel = new JPanel();
@@ -85,6 +100,12 @@ public class TaskListEditWindow extends AbstractEditWindow {
 		
 	}
 	
+	/**
+	 * Adds new editable field with the information from the
+	 * provided task already entered into those fields.
+	 * @author Jacob Ficker
+	 * @param t the task to be loaded into the fields.
+	 */
 	private void addTaskEdit(Task t) {
 		editFields.add(new TaskEdit(t.getDescription(), t.getHoursToComplete(), t.isDone()));
 		JButton b = new JButton("Remove Above Item");
@@ -98,6 +119,11 @@ public class TaskListEditWindow extends AbstractEditWindow {
 		this.revalidate();
 	}
 	
+	/**
+	 * Removes editable field.
+	 * @author Jacob Ficker
+	 * @param i the index of the field in the list the field is stored in.
+	 */
 	private void removeMe(int i) {
 		myPanel.remove(editFields.get(i));
 		myPanel.remove(removeButtons.get(i));
@@ -107,6 +133,10 @@ public class TaskListEditWindow extends AbstractEditWindow {
 		this.revalidate();
 	}
 
+	/**
+	 * Saves task list to the project.
+	 * @author Jacob Ficker
+	 */
 	@Override
 	public void save() {
 		boolean allGood = true;

@@ -27,13 +27,14 @@ public class Project implements Serializable {
 	private Double costPerMonth;
 	
 	/**
+	 * Full sized constructor.
 	 * @author Jacob Ficker
 	 * @param mat
 	 * @param tas
 	 * @param nam
 	 * @param desc
 	 * @param img
-	 * @param saving
+	 * @param saving 
 	 * @param costs
 	 * @param theDate
 	 * @param theSize
@@ -180,8 +181,9 @@ public class Project implements Serializable {
 	}
 
 	/**
+	 * Creates deep copy of task list.
 	 * @author Jacob Ficker
-	 * @return
+	 * @return deep copy of list
 	 */
 	public List<Task> getTaskListCopy() {
 		List<Task> returnMe = new ArrayList<Task>();
@@ -192,8 +194,9 @@ public class Project implements Serializable {
 	}
 
 	/**
+	 * Creates deep copy of material list.
 	 * @author Jacob Ficker
-	 * @return
+	 * @return deep copy of list.
 	 */
 	public List<Material> getMaterialListCopy() {
 		List<Material> returnMe = new ArrayList<Material>();
@@ -308,8 +311,9 @@ public class Project implements Serializable {
 	}
 	
 	/**
+	 * Uses materials list to find out how much money has been spent on materials already.
 	 * @author Jacob Ficker
-	 * @return
+	 * @return Total amount spent so far.
 	 */
 	public Double getSpent() {
 		Double done = 0.0;

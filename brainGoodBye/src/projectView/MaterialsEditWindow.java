@@ -31,7 +31,7 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 	private JPanel myPanel;
 	
 	/**
-	 * Basic Constructor
+	 * Basic Constructor. 
 	 * @author Jacob Ficker
 	 */
 	public MaterialsEditWindow(Project theProj) {
@@ -42,7 +42,8 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 	}
 	
 	/**
-	 * Loads the materials list into the editable fields.
+	 * Loads the materials list into the editable fields and
+	 * makes those fields visible to the user.
 	 * @author Jacob Ficker
 	 */
 	public void initialize() {

@@ -20,6 +20,8 @@ public class Material implements Cloneable, Serializable{
 	private String myName;
 	
 	/**
+	 * This is the basic constructor for making a new material.
+	 * The material created will be set to not acquired yet.
 	 * @author Jacob Ficker
 	 * @param nam
 	 * @param quant
@@ -33,6 +35,8 @@ public class Material implements Cloneable, Serializable{
 	}
 	
 	/**
+	 * This is the constructor allows the specification of whether or not
+	 * the material has already been acquired.
 	 * @author Jacob Ficker
 	 * @param name
 	 * @param quantity

@@ -18,6 +18,10 @@ public class TaskEdit extends JPanel {
 	private JTextField myHours;
 	private JCheckBox myComplete;
 	
+	/**
+	 * Initializes editable fields with "Description" and a value of zero.
+	 * @author Jacob Ficker
+	 */
 	public TaskEdit() {
 		super();
 		myDescription = new JTextField("Description");
@@ -26,6 +30,13 @@ public class TaskEdit extends JPanel {
 		initialize();
 	}
 	
+	/**
+	 * Initializes the editable fields to contain specified values.
+	 * This does not include the is complete check box.
+	 * @author Jacob Ficker
+	 * @param theDesc
+	 * @param theHours
+	 */
 	public TaskEdit(String theDesc, Double theHours) {
 		super();
 		myDescription = new JTextField(theDesc);
@@ -34,6 +45,15 @@ public class TaskEdit extends JPanel {
 		initialize();
 	}
 	
+	/**
+	 * Initializes the editable fields to contain specified values.
+	 * This constructor can also set whether or not the is complete checkbox is checked
+	 * upon creating of the object.
+	 * @author Jacob Ficker
+	 * @param theDesc
+	 * @param theHours
+	 * @param complete
+	 */
 	public TaskEdit(String theDesc, Double theHours, boolean complete) {
 		this(theDesc, theHours);
 		myComplete.setSelected(complete);
@@ -41,6 +61,10 @@ public class TaskEdit extends JPanel {
 		this.repaint();
 	}
 	
+	/**
+	 * Sets up GUI elements
+	 * @author Jacob Ficker
+	 */
 	private void initialize() {
 		this.setLayout(new FlowLayout());
 		myDescription.setColumns(40);
@@ -51,15 +75,27 @@ public class TaskEdit extends JPanel {
 		this.add(myComplete);
 	}
 	
+	/**
+	 * @author Jacob Ficker
+	 * @return
+	 */
 	public String getDescription() {
 		return myDescription.getText();
 	}
 	
+	/**
+	 * @author Jacob Ficker
+	 * @return
+	 */
 	public Double getHoursToComplete() {
 		Double d = Double.parseDouble(myHours.getText());
 		return d;
 	}
 	
+	/**
+	 * @author Jacob Ficker
+	 * @return
+	 */
 	public boolean isComplete() {
 		return myComplete.isSelected();
 	}

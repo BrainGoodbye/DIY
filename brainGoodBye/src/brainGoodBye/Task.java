@@ -13,6 +13,7 @@ public class Task implements Cloneable, Serializable {
 	private boolean isDone;
 	
 	/**
+	 * Basic constructor. Assumes task is not yet completed.
 	 * @author Jacob Ficker
 	 * @param hours
 	 * @param desc
@@ -24,6 +25,8 @@ public class Task implements Cloneable, Serializable {
 	}
 	
 	/**
+	 * This constructor allows the specification of whether or not
+	 * a task is completed.
 	 * @author Jacob Ficker
 	 * @param hours
 	 * @param desc
