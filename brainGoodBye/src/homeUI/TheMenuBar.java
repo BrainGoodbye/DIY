@@ -27,6 +27,7 @@ public class TheMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 8057480567908033934L;
 
 	/**
+	 * @author Jacob Ficker
 	 * Instantiates the menu bar.
 	 */
 	public TheMenuBar() {
@@ -35,13 +36,10 @@ public class TheMenuBar extends JMenuBar {
 	}
 	
 	/**
+	 * @author Jacob Ficker
 	 * Populates the menu bar with menus.
 	 */
 	public void initialize() {
-		
-		//File Menu Items
-		
-		//Edit Menu Items
 		
 		//Help Menu Items
 		final JMenuItem about = new JMenuItem("About...");
