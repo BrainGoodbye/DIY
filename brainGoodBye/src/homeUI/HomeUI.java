@@ -81,6 +81,7 @@ public class HomeUI extends JFrame {
 	 * @author Jacob Ficker
 	 * @author Joey Hunt
 	 * @author Hunter Lantz
+	 * @author Thaddaeus Hug
 	 */
 	public void start() {
 		//Basic setup

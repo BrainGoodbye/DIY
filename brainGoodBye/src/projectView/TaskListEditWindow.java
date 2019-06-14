@@ -14,6 +14,7 @@ import brainGoodBye.Task;
 /**
  * The window where the task list can be edited.
  * @author Jacob Ficker
+ * @author Thaddaeus - minor edits
  *
  */
 public class TaskListEditWindow extends AbstractEditWindow {
@@ -31,7 +32,8 @@ public class TaskListEditWindow extends AbstractEditWindow {
 	
 	/**
 	 * Basic Constructor.
-	 *@author Jacob Ficker
+	 * @author Jacob Ficker
+	 * @author Thaddaeus - minor edits
 	 * @param theProj
 	 */
 	public TaskListEditWindow(Project theProj) {
@@ -136,6 +138,7 @@ public class TaskListEditWindow extends AbstractEditWindow {
 	/**
 	 * Saves task list to the project.
 	 * @author Jacob Ficker
+	 * @author Thaddaeus - minor edits
 	 */
 	@Override
 	public void save() {

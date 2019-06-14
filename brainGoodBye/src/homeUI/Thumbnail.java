@@ -24,6 +24,7 @@ import brainGoodBye.Project;
  * 
  * @author Joey Hunt
  * @author Hunter Lantz
+ * @author Thaddaeus - minor edits
  */
 public class Thumbnail extends JPanel implements MouseListener, PropertyChangeListener {
 	
@@ -46,6 +47,7 @@ public class Thumbnail extends JPanel implements MouseListener, PropertyChangeLi
 	 * 
 	 * @author Joey Hunt
 	 * @author Hunter Lantz
+	 * @author Thaddaeus Hug
 	 */
 	public Thumbnail(final Project project, OptionsPanel options) {
 		myProject = project; 

@@ -14,6 +14,7 @@ import brainGoodBye.Project;
 /**
  * Window where you edit materials.
  * @author Jacob Ficker
+ * @author Thaddaeus - minor edits
  *
  */
 public class MaterialsEditWindow extends AbstractEditWindow {
@@ -33,6 +34,7 @@ public class MaterialsEditWindow extends AbstractEditWindow {
 	/**
 	 * Basic Constructor. 
 	 * @author Jacob Ficker
+	 * @author Thaddaeus
 	 */
 	public MaterialsEditWindow(Project theProj) {
 		super(theProj, "Edit Materials");

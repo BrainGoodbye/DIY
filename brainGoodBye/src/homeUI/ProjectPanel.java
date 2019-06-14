@@ -70,6 +70,7 @@ public class ProjectPanel extends JPanel implements PropertyChangeListener {
 	 * Initializes the project panel.
 	 * @author Hunter Lantz
 	 * @author Joey Hunt
+	 * @author Thaddaeus
 	 */
 	private void initialize() {
 		JScrollPane scroller = new JScrollPane(thumbnailPanel);

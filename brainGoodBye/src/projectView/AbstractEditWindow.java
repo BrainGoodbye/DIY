@@ -5,9 +5,9 @@ import javax.swing.JFrame;
 import brainGoodBye.Project;
 
 /**
- * 
+ * Implements basic functionality of an edit window for the concrete edit windows to extend from.
  * @author Jacob Ficker
- * 
+ * @author Thaddaeus Hug
  */
 public abstract class AbstractEditWindow extends JFrame implements EditWindow{
 
@@ -18,6 +18,12 @@ public abstract class AbstractEditWindow extends JFrame implements EditWindow{
 	
 	Project myProject;
 	
+	/**
+	 * @author Jacob Ficker
+	 * @author Thaddaeus
+	 * @param theProj
+	 * @param windowName
+	 */
 	public AbstractEditWindow(Project theProj, String windowName) {
 		super(windowName);
 		myProject = theProj;
