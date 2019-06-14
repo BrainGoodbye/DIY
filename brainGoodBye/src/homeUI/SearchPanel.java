@@ -26,7 +26,7 @@ public class SearchPanel extends JPanel implements PropertyChangeListener {
 	/**
 	 * An array of strings representing the ordering methods available.
 	 */
-	private static final String[] sortOptions = {"Cost", "Name", "Time"};
+	private static final String[] sortOptions = {"Cost", "Name", "Time", "Size"};
 	
 	/**
 	 * A combo box containing sort options.
